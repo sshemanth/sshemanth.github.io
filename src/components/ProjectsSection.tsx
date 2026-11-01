@@ -166,24 +166,24 @@ const ProjectCard: React.FC<CardProps> = ({
     >
       <motion.div
         style={{ scale }}
-        className="w-full rounded-[28px] sm:rounded-[36px] md:rounded-[44px] border border-white/20 bg-[#101116] p-5 sm:p-7 md:p-8 shadow-2xl overflow-hidden min-h-[420px] lg:h-[460px] flex flex-col justify-center"
+        className="w-full rounded-2xl sm:rounded-3xl border border-white/20 bg-[#101116] p-5 sm:p-7 md:p-8 shadow-2xl overflow-hidden flex flex-col justify-center"
       >
         <div
-          className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-8 w-full h-full ${
+          className={`flex flex-col lg:flex-row items-stretch gap-6 lg:gap-8 w-full ${
             isImageRight ? 'lg:flex-row-reverse' : ''
           }`}
         >
-          {/* Image side (45% width on desktop): aspect-ratio 4/3, max-height 380px, object-fit cover */}
+          {/* Image side (45% width on desktop): cropped to fit neatly within the content height */}
           <div className="w-full lg:w-[45%] shrink-0 flex flex-col justify-center">
             <div
               onClick={() => onOpenProject(project)}
-              className="w-full aspect-[4/3] max-h-[380px] rounded-[20px] sm:rounded-[26px] overflow-hidden bg-[#16171B] border border-white/10 hover:border-white/30 cursor-pointer group relative shadow-xl transition-all duration-300"
+              className="w-full h-56 sm:h-72 lg:h-full min-h-[220px] rounded-xl sm:rounded-2xl overflow-hidden bg-[#16171B] border border-white/10 hover:border-white/30 cursor-pointer group relative shadow-xl transition-all duration-300"
             >
               <img
                 src={project.col2Image}
                 alt={`${project.title} - Illustrative image`}
                 loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 block"
+                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 block"
               />
               <div className="absolute bottom-2.5 right-2.5 z-10 pointer-events-none">
                 <span className="text-[12px] font-mono uppercase tracking-wider text-[#D7E2EA] bg-black/75 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/15">
@@ -194,7 +194,7 @@ const ProjectCard: React.FC<CardProps> = ({
           </div>
 
           {/* Text side (55% width on desktop): number, tag, title, 2-3 line summary, highlighted key result, buttons */}
-          <div className="w-full lg:w-[55%] flex flex-col justify-between py-1 sm:py-2 text-left h-full">
+          <div className="w-full lg:w-[55%] flex flex-col justify-between py-1 sm:py-2 text-left gap-4">
             <div>
               {/* Number & Tag */}
               <div className="flex items-center gap-3 mb-2">
@@ -231,7 +231,7 @@ const ProjectCard: React.FC<CardProps> = ({
             </div>
 
             {/* Action Buttons: Paper, View Project, Details */}
-            <div className="pt-5 mt-4 border-t border-white/10 flex flex-wrap items-center gap-3">
+            <div className="pt-4 mt-2 border-t border-white/10 flex flex-wrap items-center gap-2.5 sm:gap-3">
               {project.id === 'brats-mets-segmentation' && (
                 <a
                   href="https://openreview.net/forum?noteId=swAAtfR82q"

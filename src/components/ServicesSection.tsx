@@ -134,8 +134,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         {/* Evenly Shared Full Width Boxes: Open to PhD Box & Pink Get in Touch Box */}
         <FadeIn delay={0.3} y={25} className="mt-12 sm:mt-16 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full items-stretch">
-            {/* Box 1: Open to PhD Positions & Research Collaborations */}
-            <div className="bg-[#0C0C0C] text-[#D7E2EA] rounded-[32px] sm:rounded-[40px] p-6 sm:p-8 md:p-9 border border-[#272932] shadow-2xl relative overflow-hidden flex flex-col justify-between gap-5 sm:gap-6 h-full">
+            {/* Box 1: Open to PhD Positions & Research Collaborations (Rectangular box, no cutting at edges) */}
+            <div className="bg-[#0C0C0C] text-[#D7E2EA] rounded-2xl p-7 sm:p-8 md:p-9 border border-[#272932] shadow-2xl relative overflow-hidden flex flex-col justify-between gap-5 sm:gap-6 h-full">
               <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-[#B600A8]/20 via-[#7621B0]/10 to-transparent blur-3xl pointer-events-none" />
 
               <div className="relative z-10 space-y-3.5">
@@ -152,19 +152,19 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               </div>
 
               {/* Bottom tags: fitted within content and shifted slightly to the right side */}
-              <div className="relative z-10 pt-4 mt-2 border-t border-white/10 flex flex-wrap items-center gap-2.5 text-[13px] font-mono text-[#D7E2EA] pl-3 sm:pl-5">
-                <span className="px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15">
+              <div className="relative z-10 pt-4 mt-2 border-t border-white/10 flex flex-wrap items-center gap-2.5 text-[13px] font-mono text-[#D7E2EA] pl-2 sm:pl-4">
+                <span className="px-3.5 py-1.5 rounded-lg bg-white/10 border border-white/15">
                   Target: 2027 Admission
                 </span>
-                <span className="px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15">
+                <span className="px-3.5 py-1.5 rounded-lg bg-white/10 border border-white/15">
                   AIVision Nexus Lab, UTS
                 </span>
               </div>
             </div>
 
-            {/* Box 2: Pink Gradient Get in Touch Box */}
+            {/* Box 2: Pink Gradient Get in Touch Box (Rectangular box, no cutting at edges) */}
             <div
-              className="rounded-[32px] sm:rounded-[40px] p-6 sm:p-8 md:p-9 text-white shadow-2xl relative flex flex-col justify-between gap-5 sm:gap-6 h-full"
+              className="rounded-2xl p-7 sm:p-8 md:p-9 text-white shadow-2xl relative flex flex-col justify-between gap-5 sm:gap-6 h-full"
               style={{
                 background:
                   'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
@@ -191,7 +191,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   <button
                     type="button"
                     onClick={onOpenContact}
-                    className="rounded-full bg-white text-[#0C0C0C] hover:bg-[#D7E2EA] px-7 py-3 text-sm font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-xl"
+                    className="rounded-xl bg-white text-[#0C0C0C] hover:bg-[#D7E2EA] px-7 py-3 text-sm font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-xl"
                   >
                     <Mail className="w-4 h-4 text-[#B600A8]" />
                     <span>Get in Touch</span>
@@ -202,7 +202,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     download="Sri_Sai_Hemanth_Bollepalli_CV.pdf"
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full bg-black/40 hover:bg-black/60 border border-white/35 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white flex items-center gap-2 transition-all cursor-pointer shadow-md"
+                    className="rounded-xl bg-black/40 hover:bg-black/60 border border-white/35 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white flex items-center gap-2 transition-all cursor-pointer shadow-md"
                   >
                     <FileDown className="w-4 h-4 text-cyan-300" />
                     <span>Download CV</span>
@@ -210,7 +210,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 </div>
 
                 {/* Full email clearly displayed, fitted within content and shifted slightly to the right side */}
-                <div className="pt-0.5 pl-3 sm:pl-5">
+                <div className="pt-0.5 pl-2 sm:pl-4">
                   <a
                     href="mailto:sshemanthofficial@gmail.com"
                     className="text-sm sm:text-base font-mono text-white/95 hover:text-white underline underline-offset-4 transition-colors break-all inline-block font-medium py-0.5"
