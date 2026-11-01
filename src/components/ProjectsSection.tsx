@@ -9,6 +9,12 @@ interface ProjectsSectionProps {
   onOpenProject: (project: ProjectItem) => void;
 }
 
+const BASE = import.meta.env.BASE_URL || '/';
+const normalizePath = (path: string) => {
+  const clean = path.startsWith('/') ? path.slice(1) : path;
+  return `${BASE}${clean}`;
+};
+
 export const RESEARCH_PROJECTS: ProjectItem[] = [
   {
     id: 'brats-mets-segmentation',
@@ -33,7 +39,7 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
       { label: 'Challenge Code', url: 'https://github.com/sshemanth/brats2026' },
       { label: 'Primus Study', url: 'https://github.com/sshemanth/brats-mets-primus-rc' },
     ],
-    col2Image: '/images/brain-framework.png',
+    col2Image: normalizePath('images/brain-framework.png'),
     col2Label: 'Segmentation Framework Overview',
   },
   {
@@ -56,7 +62,7 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
     links: [
       { label: 'GitHub Repository', url: 'https://github.com/sshemanth' },
     ],
-    col2Image: '/images/knee-pipeline.png',
+    col2Image: normalizePath('images/knee-pipeline.png'),
     col2Label: 'Report-to-Label Pipeline',
   },
   {
@@ -106,9 +112,9 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
     links: [
       { label: 'GitHub Repository', url: 'https://github.com/sshemanth' },
     ],
-    col2Image: '/images/skin-model-comparison.png',
+    col2Image: normalizePath('images/skin-model-comparison.png'),
     col2Label: 'Model Comparison Results',
-    col1Image1: '/images/skin-classes.png',
+    col1Image1: normalizePath('images/skin-classes.png'),
     col1Label1: '7 Dermoscopic Lesion Classes',
   },
 ];
@@ -150,7 +156,6 @@ const ProjectImageFrame: React.FC<ProjectImageProps> = ({
             src={src}
             alt={label}
             loading="lazy"
-            referrerPolicy="no-referrer"
             onError={() => setError(true)}
             className="w-full h-full object-contain rounded-[18px] sm:rounded-[26px] md:rounded-[32px] transition-transform duration-500 group-hover:scale-[1.02]"
           />
@@ -201,17 +206,17 @@ const ProjectCard: React.FC<CardProps> = ({
   return (
     <div
       ref={cardContainerRef}
-      className="h-[88vh] sticky flex items-start justify-center"
+      className="h-[88vh] sticky flex items-start justify-center w-full"
       style={{
         top: `calc(4.5rem + ${index * 26}px)`,
       }}
     >
       <motion.div
         style={{ scale }}
-        className="w-full max-w-6xl rounded-[36px] sm:rounded-[46px] md:rounded-[56px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-6 md:p-8 flex flex-col justify-between shadow-2xl overflow-hidden"
+        className="w-full rounded-[36px] sm:rounded-[46px] md:rounded-[56px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-5 sm:p-7 md:p-9 flex flex-col justify-between shadow-2xl overflow-hidden"
       >
         {/* Top row */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 sm:pb-5 border-b border-[#D7E2EA]/15 mb-3 sm:mb-4">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 sm:pb-5 border-b border-[#D7E2EA]/15 mb-3 sm:mb-4 w-full">
           <div className="flex items-center gap-3 sm:gap-6 md:gap-8 min-w-0 flex-1">
             {/* Number */}
             <div
@@ -240,11 +245,11 @@ const ProjectCard: React.FC<CardProps> = ({
           </div>
         </div>
 
-        {/* Bottom row: Clean 16:9 aspect-ratio showcase */}
-        <div className="flex-1 min-h-0 flex flex-col justify-center">
+        {/* Bottom row: Clean 16:9 aspect-ratio showcase using full centered width */}
+        <div className="flex-1 min-h-0 flex flex-col justify-center w-full">
           {hasDetailImage ? (
             /* Project 03 layout: Main image + 1 Detail image side-by-side */
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 h-full min-h-[240px] sm:min-h-[300px] md:min-h-[380px]">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 h-full min-h-[240px] sm:min-h-[300px] md:min-h-[380px] w-full">
               {/* Main Image: Model Comparison Results (approx 62% width) */}
               <div className="md:col-span-7 h-full min-h-[200px]">
                 <ProjectImageFrame
@@ -289,11 +294,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProject 
   return (
     <section
       id="projects"
-      className="bg-[#0C0C0C] text-[#D7E2EA] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-6 sm:-mt-8 z-10 relative px-4 sm:px-6 md:px-10 pb-28"
+      className="w-full bg-[#0C0C0C] text-[#D7E2EA] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-6 sm:-mt-8 z-10 relative py-16 sm:py-20 md:py-24"
     >
-      <div className="max-w-6xl mx-auto w-full">
-        {/* Section Heading - tight top padding to eliminate dead gaps */}
-        <FadeIn delay={0} y={30} className="text-center pt-8 sm:pt-12 md:pt-14 mb-8 sm:mb-12">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-10">
+        {/* Section Heading */}
+        <FadeIn delay={0} y={30} className="text-center pt-2 sm:pt-4 mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-1.5 mb-2.5">
             <Sparkles className="w-3.5 h-3.5 text-[#B600A8]" />
             <span className="text-xs uppercase tracking-widest font-semibold text-[#B600A8]">
@@ -308,8 +313,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProject 
           </h2>
         </FadeIn>
 
-        {/* 3 Sticky-Stacking Project Cards */}
-        <div className="relative pb-16 space-y-8 sm:space-y-12">
+        {/* 3 Sticky-Stacking Project Cards spanning full centered width */}
+        <div className="relative pb-16 space-y-8 sm:space-y-12 w-full">
           {RESEARCH_PROJECTS.map((project, index) => (
             <ProjectCard
               key={project.id}

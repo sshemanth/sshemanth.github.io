@@ -1,7 +1,7 @@
 import React from 'react';
 import FadeIn from './FadeIn';
 import { ResearchFocusItem } from '../types';
-import { ArrowUpRight, Mail, GraduationCap } from 'lucide-react';
+import { ArrowUpRight, Mail, GraduationCap, Send } from 'lucide-react';
 
 interface ServicesSectionProps {
   onOpenContact: () => void;
@@ -58,9 +58,9 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   return (
     <section
       id="interests"
-      className="bg-[#FFFFFF] text-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 py-12 sm:py-16 md:py-20 relative z-0"
+      className="w-full bg-[#FFFFFF] text-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] py-16 sm:py-20 md:py-24 relative z-0"
     >
-      <div className="max-w-5xl mx-auto w-full">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-10">
         {/* Section Heading */}
         <FadeIn delay={0} y={30}>
           <div className="text-center mb-2">
@@ -69,21 +69,21 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
             </span>
           </div>
           <h2
-            className="text-[#0C0C0C] font-black uppercase text-center leading-none tracking-tight mb-8 sm:mb-12 md:mb-14"
+            className="text-[#0C0C0C] font-black uppercase text-center leading-none tracking-tight mb-10 sm:mb-14"
             style={{ fontSize: 'clamp(2.4rem, 8vw, 120px)' }}
           >
             Research Interests
           </h2>
         </FadeIn>
 
-        {/* 5 Research Interest Items (01 - 05) */}
+        {/* 5 Research Interest Items (Full Centered Width) */}
         <div className="w-full">
           {RESEARCH_INTERESTS.map((item, index) => (
             <FadeIn
               key={item.id}
               delay={index * 0.08}
               y={25}
-              className={`py-5 sm:py-6 md:py-7 border-t border-[rgba(12,12,12,0.15)] ${
+              className={`py-6 sm:py-7 md:py-8 border-t border-[rgba(12,12,12,0.15)] ${
                 index === RESEARCH_INTERESTS.length - 1 ? 'border-b' : ''
               }`}
             >
@@ -108,20 +108,20 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   </div>
                   <h3
                     className="font-medium uppercase text-[#0C0C0C] mb-1.5 transition-colors duration-200 group-hover:text-[#B600A8]"
-                    style={{ fontSize: 'clamp(1rem, 2vw, 1.8rem)' }}
+                    style={{ fontSize: 'clamp(1.1rem, 2.2vw, 1.9rem)' }}
                   >
                     {item.name}
                   </h3>
                   <p
-                    className="font-light leading-relaxed max-w-2xl opacity-80 text-[#0C0C0C]"
+                    className="font-light leading-relaxed opacity-80 text-[#0C0C0C]"
                     style={{ fontSize: 'clamp(0.85rem, 1.4vw, 1.15rem)' }}
                   >
                     {item.description}
                   </p>
                 </div>
 
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity hidden md:block">
-                  <div className="p-3 rounded-full bg-[#0C0C0C]/5 text-[#0C0C0C]">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity hidden md:block shrink-0">
+                  <div className="p-3.5 rounded-full bg-[#0C0C0C]/5 text-[#0C0C0C] group-hover:bg-[#B600A8] group-hover:text-white transition-colors">
                     <ArrowUpRight className="w-5 h-5" />
                   </div>
                 </div>
@@ -130,44 +130,74 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           ))}
         </div>
 
-        {/* Open to PhD Positions & Research Collaborations Box */}
-        <FadeIn delay={0.3} y={25} className="mt-10 sm:mt-14">
-          <div className="bg-[#0C0C0C] text-[#D7E2EA] rounded-[32px] sm:rounded-[40px] p-6 sm:p-10 border border-[#272932] shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#B600A8]/20 via-[#7621B0]/10 to-transparent blur-3xl pointer-events-none" />
+        {/* Evenly Shared Full Width Boxes: Open to PhD Box & Pink Get in Touch Box */}
+        <FadeIn delay={0.3} y={25} className="mt-12 sm:mt-16 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+            {/* Box 1: Open to PhD Positions & Research Collaborations */}
+            <div className="bg-[#0C0C0C] text-[#D7E2EA] rounded-[32px] sm:rounded-[40px] p-7 sm:p-10 border border-[#272932] shadow-2xl relative overflow-hidden flex flex-col justify-between">
+              <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-[#B600A8]/20 via-[#7621B0]/10 to-transparent blur-3xl pointer-events-none" />
 
-            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              <div className="max-w-xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B600A8]/20 border border-[#B600A8]/40 text-[#D7E2EA] text-xs font-semibold uppercase tracking-wider mb-3">
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B600A8]/20 border border-[#B600A8]/40 text-[#D7E2EA] text-xs font-semibold uppercase tracking-wider mb-4">
                   <GraduationCap className="w-3.5 h-3.5 text-[#B600A8]" />
                   <span>Doctoral Opportunities</span>
                 </div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-white leading-tight">
                   Open to PhD Positions &amp; Research Collaborations
                 </h3>
-                <p className="text-xs sm:text-sm text-[#D7E2EA]/85 font-light mt-2.5 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#D7E2EA]/85 font-light mt-3 leading-relaxed">
                   I am seeking a PhD in Medical AI starting in 2027 and welcome research collaborations. If your lab explores medical imaging segmentation, clinical NLP weak supervision, or robust multimodal architectures, I would be glad to connect.
                 </p>
               </div>
 
-              <div className="shrink-0 flex flex-col sm:flex-row md:flex-col gap-2.5 w-full sm:w-auto">
+              <div className="relative z-10 pt-6 mt-6 border-t border-white/10 flex flex-wrap items-center gap-2 text-xs font-mono text-[#D7E2EA]/70">
+                <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+                  Target: 2027 Admission
+                </span>
+                <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+                  AIVision Nexus Lab
+                </span>
+              </div>
+            </div>
+
+            {/* Box 2: Pink Gradient Get in Touch Box */}
+            <div
+              className="rounded-[32px] sm:rounded-[40px] p-7 sm:p-10 text-white shadow-2xl relative overflow-hidden flex flex-col justify-between"
+              style={{
+                background:
+                  'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
+                boxShadow:
+                  '0px 4px 4px rgba(181, 1, 167, 0.25), 4px 4px 12px #7721B1 inset',
+                outline: '2px solid white',
+                outlineOffset: '-3px',
+              }}
+            >
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/30 text-white text-xs font-semibold uppercase tracking-wider mb-4">
+                  <Send className="w-3.5 h-3.5 text-white" />
+                  <span>Direct Inquiry</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-white leading-tight">
+                  Get in Touch
+                </h3>
+                <p className="text-xs sm:text-sm text-white/90 font-light mt-3 leading-relaxed">
+                  Interested in discussing potential PhD supervision, research topics, preprints, or dataset access? Send a direct message or email.
+                </p>
+              </div>
+
+              <div className="pt-6 mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <button
                   type="button"
                   onClick={onOpenContact}
-                  className="rounded-full px-7 py-3 text-xs sm:text-sm font-medium uppercase tracking-widest text-white flex items-center justify-center gap-2 cursor-pointer transition-transform hover:scale-105 active:scale-95"
-                  style={{
-                    background:
-                      'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
-                    boxShadow: '0px 4px 4px rgba(181, 1, 167, 0.25), 4px 4px 12px #7721B1 inset',
-                    outline: '2px solid white',
-                    outlineOffset: '-3px',
-                  }}
+                  className="rounded-full bg-white text-[#0C0C0C] hover:bg-[#D7E2EA] px-8 py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-widest flex items-center gap-2 cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-lg"
                 >
-                  <Mail className="w-4 h-4" />
-                  <span>Get in Touch</span>
+                  <Mail className="w-4 h-4 text-[#B600A8]" />
+                  <span>Send Message</span>
                 </button>
+
                 <a
                   href="mailto:sshemanthofficial@gmail.com"
-                  className="text-xs text-center text-[#D7E2EA]/60 hover:text-white transition-colors"
+                  className="text-xs sm:text-sm font-mono text-white/80 hover:text-white underline underline-offset-4 transition-colors"
                 >
                   sshemanthofficial@gmail.com
                 </a>

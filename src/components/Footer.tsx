@@ -13,8 +13,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContact, onOpenBio }) => {
   };
 
   return (
-    <footer className="bg-[#080808] border-t border-white/10 text-[#D7E2EA] px-6 md:px-12 py-16 sm:py-20 relative z-20">
-      <div className="max-w-6xl mx-auto flex flex-col justify-between gap-12">
+    <footer className="w-full bg-[#080808] border-t border-white/10 text-[#D7E2EA] py-16 sm:py-20 relative z-20 select-none">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-between gap-12">
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 pb-12 border-b border-white/10">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#B600A8] mb-2">
@@ -73,7 +73,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContact, onOpenBio }) => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-[#D7E2EA]/50 font-light">
-          <div className="flex items-center gap-6 uppercase tracking-wider">
+          <div className="flex flex-wrap items-center gap-6 uppercase tracking-wider">
             <button
               onClick={() => {
                 const el = document.getElementById('about');
