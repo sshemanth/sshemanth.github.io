@@ -2,6 +2,7 @@ import React from 'react';
 import FadeIn from './FadeIn';
 import AnimatedText from './AnimatedText';
 import ContactButton from './ContactButton';
+import SectionBackground from './SectionBackground';
 import { BookOpen, Sparkles, Award, GraduationCap } from 'lucide-react';
 
 interface AboutSectionProps {
@@ -21,6 +22,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
       id="about"
       className="min-h-[80vh] relative flex flex-col items-center justify-center py-16 sm:py-20 md:py-24 overflow-hidden bg-[#0C0C0C]"
     >
+      {/* Decorative AI Background */}
+      <SectionBackground imageName="bg-about.webp" position="right" theme="dark" priority={false} />
+
       {/* Centered container with w-full max-w-7xl mx-auto px-6 md:px-10 */}
       <div className="w-full max-w-7xl mx-auto px-6 md:px-10 relative z-10 flex flex-col items-center justify-center text-center">
         {/* Heading */}

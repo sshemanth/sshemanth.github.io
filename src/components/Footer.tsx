@@ -1,5 +1,6 @@
 import React from 'react';
 import ContactButton from './ContactButton';
+import SectionBackground from './SectionBackground';
 import { ArrowUp, Mail, Linkedin, Github, GraduationCap, FileDown } from 'lucide-react';
 
 interface FooterProps {
@@ -13,8 +14,16 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContact, onOpenBio }) => {
   };
 
   return (
-    <footer className="w-full bg-[#080808] border-t border-white/10 text-[#D7E2EA] py-16 sm:py-20 relative z-20 select-none">
-      <div className="w-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-between gap-12">
+    <footer className="w-full bg-[#080808] border-t border-white/10 text-[#D7E2EA] py-16 sm:py-20 relative z-20 select-none overflow-hidden">
+      {/* Decorative AI Background (Connected global network nodes on the right) */}
+      <SectionBackground
+        imageName="bg-contact.webp"
+        position="right"
+        theme="dark"
+        priority={false}
+      />
+
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-between gap-12 relative z-10">
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 pb-12 border-b border-white/10">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#B600A8] mb-2">

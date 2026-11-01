@@ -6,7 +6,7 @@ export const PublicationsSection: React.FC = () => {
   return (
     <section
       id="publications"
-      className="w-full bg-[#0C0C0C] text-[#D7E2EA] py-16 sm:py-20 md:py-24 select-none relative border-t border-white/5"
+      className="w-full bg-transparent text-[#D7E2EA] py-16 sm:py-20 md:py-24 select-none relative z-10 border-t border-white/5"
     >
       <div className="w-full max-w-7xl mx-auto px-6 md:px-10">
         {/* Section Heading */}

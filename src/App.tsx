@@ -12,6 +12,7 @@ import EducationSection from './components/EducationSection';
 import NewsSection from './components/NewsSection';
 import ServicesSection from './components/ServicesSection';
 import ProjectsSection from './components/ProjectsSection';
+import SectionBackground from './components/SectionBackground';
 import Footer from './components/Footer';
 import ContactModal from './components/ContactModal';
 import BioModal from './components/BioModal';
@@ -59,14 +60,19 @@ export default function App() {
         onOpenBio={handleOpenBio}
       />
 
-      {/* 4. PublicationsSection (MICCAI 2026 Accepted Paper & Links) */}
-      <PublicationsSection />
-
-      {/* 5. EducationSection (UTS Master of AI & JNTU Kakinada B.Tech) */}
-      <EducationSection />
-
-      {/* 6. NewsSection (Timeline of recent milestones) */}
-      <NewsSection />
+      {/* 4-6. Publications, Education and News (Stacked MRI background positioned right) */}
+      <div className="relative overflow-hidden w-full bg-[#0C0C0C]">
+        <SectionBackground
+          imageName="bg-publications.webp"
+          position="right"
+          theme="dark"
+          priority={false}
+          parallaxOffset={50}
+        />
+        <PublicationsSection />
+        <EducationSection />
+        <NewsSection />
+      </div>
 
       {/* 7. Research Focus Section (5 research areas + evenly shared PhD & contact boxes) */}
       <ServicesSection

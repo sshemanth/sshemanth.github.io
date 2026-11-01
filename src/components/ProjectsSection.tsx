@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import FadeIn from './FadeIn';
+import SectionBackground from './SectionBackground';
 import { ProjectItem } from '../types';
 import { ExternalLink, FileText, Github, Sparkles } from 'lucide-react';
 
@@ -276,9 +277,19 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProject 
   return (
     <section
       id="projects"
-      className="w-full bg-[#0C0C0C] text-[#D7E2EA] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-6 sm:-mt-8 z-10 relative py-16 sm:py-20 md:py-24"
+      className="w-full bg-[#0C0C0C] text-[#D7E2EA] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-6 sm:-mt-8 z-10 relative py-16 sm:py-20 md:py-24 overflow-hidden"
     >
-      <div className="w-full max-w-7xl mx-auto px-6 md:px-10">
+      {/* Decorative AI Background (Wide neural network grid & heartbeat, full width subtle) */}
+      <SectionBackground
+        imageName="bg-projects.webp"
+        position="center"
+        theme="dark"
+        priority={false}
+        opacityClassName="opacity-15 sm:opacity-25 md:opacity-35"
+        parallaxOffset={40}
+      />
+
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-10 relative z-10">
         {/* Section Heading */}
         <FadeIn delay={0} y={30} className="text-center pt-2 sm:pt-4 mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-1.5 mb-2.5">

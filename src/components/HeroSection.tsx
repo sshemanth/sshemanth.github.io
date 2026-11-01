@@ -2,6 +2,7 @@ import React from 'react';
 import FadeIn from './FadeIn';
 import HeroPortrait from './HeroPortrait';
 import ContactButton from './ContactButton';
+import SectionBackground from './SectionBackground';
 import { MapPin, GraduationCap, ArrowUpRight, FileDown } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -22,6 +23,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   return (
     <section className="min-h-screen w-full flex flex-col justify-between overflow-x-clip relative bg-[#0C0C0C] select-none">
+      {/* Decorative AI Background */}
+      <SectionBackground imageName="bg-hero.webp" position="right" theme="dark" priority={true} />
+
       {/* 1. Navbar Container */}
       <FadeIn delay={0} y={-20} className="w-full z-30">
         <div className="w-full max-w-7xl mx-auto px-6 md:px-10 pt-6 md:pt-8">

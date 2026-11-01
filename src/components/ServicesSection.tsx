@@ -1,5 +1,6 @@
 import React from 'react';
 import FadeIn from './FadeIn';
+import SectionBackground from './SectionBackground';
 import { ResearchFocusItem } from '../types';
 import { ArrowUpRight, Mail, GraduationCap, Send } from 'lucide-react';
 
@@ -58,9 +59,17 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   return (
     <section
       id="interests"
-      className="w-full bg-[#FFFFFF] text-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] py-16 sm:py-20 md:py-24 relative z-0"
+      className="w-full bg-[#FFFFFF] text-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] py-16 sm:py-20 md:py-24 relative overflow-hidden z-0"
     >
-      <div className="w-full max-w-7xl mx-auto px-6 md:px-10">
+      {/* Decorative AI Background (Light Theme Wireframe Scan Lines on Right) */}
+      <SectionBackground
+        imageName="bg-research.webp"
+        position="right"
+        theme="light"
+        priority={false}
+      />
+
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-10 relative z-10">
         {/* Section Heading */}
         <FadeIn delay={0} y={30}>
           <div className="text-center mb-2">
