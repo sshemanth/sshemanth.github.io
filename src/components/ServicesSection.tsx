@@ -135,7 +135,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         <FadeIn delay={0.3} y={25} className="mt-12 sm:mt-16 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full items-stretch">
             {/* Box 1: Open to PhD Positions & Research Collaborations */}
-            <div className="bg-[#0C0C0C] text-[#D7E2EA] rounded-[32px] sm:rounded-[40px] p-7 sm:p-9 md:p-10 border border-[#272932] shadow-2xl relative overflow-hidden flex flex-col justify-between gap-6 min-h-[380px]">
+            <div className="bg-[#0C0C0C] text-[#D7E2EA] rounded-[32px] sm:rounded-[40px] p-6 sm:p-8 md:p-9 border border-[#272932] shadow-2xl relative overflow-hidden flex flex-col justify-between gap-5 sm:gap-6 h-full">
               <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-[#B600A8]/20 via-[#7621B0]/10 to-transparent blur-3xl pointer-events-none" />
 
               <div className="relative z-10 space-y-3.5">
@@ -151,8 +151,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 </p>
               </div>
 
-              {/* Bottom tags with generous spacing so nothing is clipped */}
-              <div className="relative z-10 pt-5 mt-4 border-t border-white/10 flex flex-wrap items-center gap-2.5 text-[13px] font-mono text-[#D7E2EA]">
+              {/* Bottom tags: fitted within content and shifted slightly to the right side */}
+              <div className="relative z-10 pt-4 mt-2 border-t border-white/10 flex flex-wrap items-center gap-2.5 text-[13px] font-mono text-[#D7E2EA] pl-3 sm:pl-5">
                 <span className="px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15">
                   Target: 2027 Admission
                 </span>
@@ -164,7 +164,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
             {/* Box 2: Pink Gradient Get in Touch Box */}
             <div
-              className="rounded-[32px] sm:rounded-[40px] p-7 sm:p-9 md:p-10 text-white shadow-2xl relative flex flex-col justify-between gap-6 min-h-[380px]"
+              className="rounded-[32px] sm:rounded-[40px] p-6 sm:p-8 md:p-9 text-white shadow-2xl relative flex flex-col justify-between gap-5 sm:gap-6 h-full"
               style={{
                 background:
                   'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
@@ -186,7 +186,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 </p>
               </div>
 
-              <div className="pt-5 mt-4 border-t border-white/20 flex flex-col gap-4">
+              <div className="pt-4 mt-2 border-t border-white/20 flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-3">
                   <button
                     type="button"
@@ -209,8 +209,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   </a>
                 </div>
 
-                {/* Full email clearly displayed with wrap protection and inner padding */}
-                <div className="pt-1">
+                {/* Full email clearly displayed, fitted within content and shifted slightly to the right side */}
+                <div className="pt-0.5 pl-3 sm:pl-5">
                   <a
                     href="mailto:sshemanthofficial@gmail.com"
                     className="text-sm sm:text-base font-mono text-white/95 hover:text-white underline underline-offset-4 transition-colors break-all inline-block font-medium py-0.5"
