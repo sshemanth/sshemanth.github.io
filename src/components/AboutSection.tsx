@@ -55,10 +55,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             <div className="bg-[#14151A] border border-[#272932] rounded-2xl p-5 flex items-start gap-3.5">
               <Award className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
               <div>
-                <p className="text-xs uppercase tracking-wider text-[#D7E2EA]/60 font-semibold">
+                <p className="text-[13px] uppercase tracking-wider text-[#c4c4cc] font-semibold">
                   MICCAI 2026 BraTS-METS
                 </p>
-                <p className="text-sm font-medium text-white mt-0.5">
+                <p className="text-base font-medium text-white mt-0.5">
                   Accepted paper &amp; invited reviewer (3 manuscripts)
                 </p>
               </div>
@@ -67,10 +67,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             <div className="bg-[#14151A] border border-[#272932] rounded-2xl p-5 flex items-start gap-3.5">
               <GraduationCap className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
               <div>
-                <p className="text-xs uppercase tracking-wider text-[#D7E2EA]/60 font-semibold">
+                <p className="text-[13px] uppercase tracking-wider text-[#c4c4cc] font-semibold">
                   UTS Sydney · AIVision Nexus Lab
                 </p>
-                <p className="text-sm font-medium text-white mt-0.5">
+                <p className="text-base font-medium text-white mt-0.5">
                   Supervised by A/Prof. Steve Ling
                 </p>
               </div>
@@ -87,7 +87,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           <button
             type="button"
             onClick={onOpenBio}
-            className="rounded-full border-2 border-[#D7E2EA]/40 hover:border-white px-8 py-3 sm:px-10 sm:py-3.5 text-xs sm:text-sm font-medium uppercase tracking-widest text-[#D7E2EA] hover:text-white hover:bg-white/5 transition-all cursor-pointer flex items-center gap-2"
+            className="rounded-full border-2 border-white/30 hover:border-white px-7 py-3.5 sm:px-9 sm:py-4 text-sm font-semibold uppercase tracking-wider text-[#E0E6ED] hover:text-white hover:bg-white/5 transition-all cursor-pointer flex items-center gap-2 shadow-md"
           >
             <BookOpen className="w-4 h-4" />
             <span>Read Long Bio &amp; Credentials</span>

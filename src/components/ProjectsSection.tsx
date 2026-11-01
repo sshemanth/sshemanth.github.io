@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import FadeIn from './FadeIn';
 import SectionBackground from './SectionBackground';
@@ -23,6 +23,9 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
     category: 'Research · MICCAI 2026 BraTS-METS Challenge · Accepted Paper',
     tag: 'MICCAI 2026 · BRAIN METASTASIS',
     supervisor: 'A/Prof. Steve Ling, AIVision Nexus Laboratory, UTS',
+    summary:
+      'A deep learning framework for brain metastasis segmentation, comparing nnU-Net ResEnc-L with the Primus transformer and focusing on small lesions and resection cavities.',
+    keyResult: 'Paper accepted · MICCAI 2026 BraTS-METS',
     overview:
       'Brain metastases are often small and easy to miss on MRI, yet early detection is key for treatment planning. This work develops a segmentation framework that improves the detection of small lesions and post-surgical resection cavities.',
     whatIDid: [
@@ -49,6 +52,9 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
     title: 'Multi-Label Knee MRI Abnormality Detection Using Report-Derived Weak Supervision',
     category: 'Research · RSNA Knee MRI Dataset · Target Venue: MIDL 2027',
     tag: '0.88 MACRO AUC · WEAK SUPERVISION',
+    summary:
+      'Detects 12 knee abnormalities from MRI, using labels extracted from radiology reports with regex and MedGemma instead of manual annotation.',
+    keyResult: '0.88 macro AUC',
     overview:
       'Expert annotation of medical scans is slow and costly. This project uses existing radiology reports as a source of labels, allowing a model to learn to detect 12 knee abnormalities from MRI without manual image labelling.',
     whatIDid: [
@@ -72,6 +78,9 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
     title: 'Skin Lesion Classification Under Class Imbalance (HAM10000)',
     category: 'Applied Research · Dermatology Imaging · CONVNEXT + EFFICIENTNET',
     tag: 'CONVNEXT + EFFICIENTNET',
+    summary:
+      'Classifies 7 skin lesion types under heavy class imbalance, using a ConvNeXt + EfficientNet ensemble with rare-class oversampling.',
+    keyResult: '0.515 balanced accuracy (ISIC 2018 metric)',
     overview:
       'Early detection of skin cancer improves outcomes, but real dermatology datasets are highly imbalanced, with rare and dangerous lesion types under-represented. This project classifies dermoscopy images into 7 lesion types with a focus on rare classes.',
     whatIDid: [
@@ -138,133 +147,129 @@ const ProjectCard: React.FC<CardProps> = ({
     offset: ['start start', 'end start'],
   });
 
-  const targetScale = 1 - (totalCards - 1 - index) * 0.03;
+  const targetScale = 1 - (totalCards - 1 - index) * 0.02;
   const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale]);
+
+  // Alternate sides:
+  // Project 01 (index 0): image left, text right
+  // Project 02 (index 1): image right, text left
+  // Project 03 (index 2): image left, text right
+  const isImageRight = index % 2 === 1;
 
   return (
     <div
       ref={cardContainerRef}
-      className="h-[88vh] sticky flex items-start justify-center w-full"
+      className="sticky flex items-start justify-center w-full pb-8 sm:pb-12"
       style={{
-        top: `calc(4.5rem + ${index * 26}px)`,
+        top: `calc(4.5rem + ${index * 24}px)`,
       }}
     >
       <motion.div
         style={{ scale }}
-        className="w-full rounded-[36px] sm:rounded-[46px] md:rounded-[56px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-5 sm:p-7 md:p-9 flex flex-col justify-between shadow-2xl overflow-hidden"
+        className="w-full rounded-[28px] sm:rounded-[36px] md:rounded-[44px] border border-white/20 bg-[#101116] p-5 sm:p-7 md:p-8 shadow-2xl overflow-hidden min-h-[420px] lg:h-[460px] flex flex-col justify-center"
       >
-        {/* Top row */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 sm:pb-5 border-b border-[#D7E2EA]/15 mb-3 sm:mb-4 w-full">
-          <div className="flex items-center gap-3 sm:gap-6 md:gap-8 min-w-0 flex-1">
-            {/* Number */}
+        <div
+          className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-8 w-full h-full ${
+            isImageRight ? 'lg:flex-row-reverse' : ''
+          }`}
+        >
+          {/* Image side (45% width on desktop): aspect-ratio 4/3, max-height 380px, object-fit cover */}
+          <div className="w-full lg:w-[45%] shrink-0 flex flex-col justify-center">
             <div
-              className="font-black text-[#D7E2EA] leading-none shrink-0"
-              style={{ fontSize: 'clamp(2.4rem, 7vw, 96px)' }}
+              onClick={() => onOpenProject(project)}
+              className="w-full aspect-[4/3] max-h-[380px] rounded-[20px] sm:rounded-[26px] overflow-hidden bg-[#16171B] border border-white/10 hover:border-white/30 cursor-pointer group relative shadow-xl transition-all duration-300"
             >
-              {project.number}
-            </div>
-
-            <div className="flex flex-col min-w-0 pr-2">
-              <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#B600A8] truncate mb-1">
-                {project.tag || project.category}
-              </span>
-              {/* Project title cleanly wraps onto 2 lines naturally without cutting */}
-              <h3 className="font-medium uppercase tracking-tight text-white text-base sm:text-xl md:text-2xl lg:text-3xl line-clamp-2 leading-tight">
-                {project.title}
-              </h3>
+              <img
+                src={project.col2Image}
+                alt={`${project.title} - Illustrative image`}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 block"
+              />
+              <div className="absolute bottom-2.5 right-2.5 z-10 pointer-events-none">
+                <span className="text-[12px] font-mono uppercase tracking-wider text-[#D7E2EA] bg-black/75 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/15">
+                  Illustrative image
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Action Links & Buttons */}
-          <div className="shrink-0 flex flex-wrap items-center gap-2.5">
-            {project.id === 'brats-mets-segmentation' && (
-              <>
+          {/* Text side (55% width on desktop): number, tag, title, 2-3 line summary, highlighted key result, buttons */}
+          <div className="w-full lg:w-[55%] flex flex-col justify-between py-1 sm:py-2 text-left h-full">
+            <div>
+              {/* Number & Tag */}
+              <div className="flex items-center gap-3 mb-2">
+                <span className="font-black text-[#D7E2EA] text-2xl sm:text-3xl md:text-4xl leading-none">
+                  {project.number}
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#B600A8]" />
+                <span className="text-[13px] font-semibold uppercase tracking-wider text-[#D84ED2]">
+                  {project.tag || project.category}
+                </span>
+              </div>
+
+              {/* Title: wraps 2-3 lines naturally without cutting */}
+              <h3 className="font-bold uppercase tracking-tight text-white text-lg sm:text-xl md:text-2xl leading-snug">
+                {project.title}
+              </h3>
+
+              {/* 2-3 line summary */}
+              <p className="text-base text-[#c4c4cc] font-light leading-relaxed mt-2.5 line-clamp-3">
+                {project.summary}
+              </p>
+
+              {/* Highlighted Key Result */}
+              {project.keyResult && (
+                <div className="mt-3.5 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-cyan-950/50 border border-cyan-500/35">
+                  <span className="text-[12px] uppercase font-bold tracking-wider text-cyan-400">
+                    Key Result:
+                  </span>
+                  <span className="text-sm font-semibold text-white">
+                    {project.keyResult}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Action Buttons: Paper, View Project, Details */}
+            <div className="pt-5 mt-4 border-t border-white/10 flex flex-wrap items-center gap-3">
+              {project.id === 'brats-mets-segmentation' && (
                 <a
                   href="https://openreview.net/forum?noteId=swAAtfR82q"
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-white/10 hover:bg-white/20 border border-white/20 flex items-center gap-1.5 transition-all cursor-pointer"
+                  className="rounded-full px-5 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white bg-white/10 hover:bg-white/20 border border-white/25 flex items-center gap-1.5 transition-all cursor-pointer shadow-sm hover:scale-105"
                 >
-                  <FileText className="w-3.5 h-3.5 text-pink-400" />
+                  <FileText className="w-4 h-4 text-pink-400" />
                   <span>Paper</span>
-                  <ExternalLink className="w-3 h-3 text-white/60" />
+                  <ExternalLink className="w-3.5 h-3.5 text-white/60" />
                 </a>
-                <a
-                  href="https://github.com/sshemanth/brats2026"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full px-5 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white flex items-center gap-1.5 transition-transform hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
-                  style={{
-                    background:
-                      'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
-                    boxShadow: '0px 4px 4px rgba(181, 1, 167, 0.25)',
-                    outline: '2px solid white',
-                    outlineOffset: '-3px',
-                  }}
-                >
-                  <Github className="w-4 h-4" />
-                  <span>View Project</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-white/80" />
-                </a>
-                <a
-                  href="https://github.com/sshemanth/brats-mets-primus-rc"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider text-cyan-300 bg-cyan-950/60 hover:bg-cyan-900/60 border border-cyan-700/50 flex items-center gap-1.5 transition-all cursor-pointer hidden md:flex"
-                >
-                  <span>Follow-up work</span>
-                  <ExternalLink className="w-3 h-3 text-cyan-400" />
-                </a>
-              </>
-            )}
+              )}
 
-            {project.id !== 'brats-mets-segmentation' && (
               <a
-                href="https://github.com/sshemanth"
+                href={project.links?.[1]?.url || 'https://github.com/sshemanth'}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full px-5 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white flex items-center gap-1.5 transition-transform hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+                className="rounded-full px-6 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white flex items-center gap-2 transition-transform hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
                 style={{
                   background:
                     'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
-                  boxShadow: '0px 4px 4px rgba(181, 1, 167, 0.25)',
-                  outline: '2px solid white',
-                  outlineOffset: '-3px',
+                  boxShadow: '0 3px 12px rgba(182, 0, 168, 0.4)',
+                  border: '1.5px solid rgba(255, 255, 255, 0.85)',
                 }}
               >
                 <Github className="w-4 h-4" />
                 <span>View Project</span>
                 <ExternalLink className="w-3.5 h-3.5 text-white/80" />
               </a>
-            )}
 
-            <button
-              type="button"
-              onClick={() => onOpenProject(project)}
-              className="text-xs uppercase tracking-wider text-[#D7E2EA]/70 hover:text-white px-3 py-1 cursor-pointer transition-colors"
-            >
-              Details
-            </button>
-          </div>
-        </div>
-
-        {/* Bottom row: Full width 16:9 visual with object-contain and caption under it */}
-        <div className="flex-1 min-h-0 flex flex-col justify-center w-full">
-          <div
-            onClick={() => onOpenProject(project)}
-            className="w-full h-full min-h-[240px] sm:min-h-[320px] md:min-h-[400px] relative overflow-hidden rounded-[24px] sm:rounded-[32px] md:rounded-[40px] bg-[#121318] border border-white/10 hover:border-white/30 cursor-pointer group flex flex-col items-center justify-center p-3 sm:p-5 transition-all duration-300"
-          >
-            <img
-              src={project.col2Image}
-              alt={`${project.title} - ${project.col2Label}`}
-              loading="lazy"
-              className="w-full h-full object-contain rounded-[18px] sm:rounded-[26px] md:rounded-[32px] transition-transform duration-500 group-hover:scale-[1.01]"
-            />
-            {/* Small caption under image: "Illustrative image" */}
-            <div className="mt-2 text-center pointer-events-none">
-              <span className="text-[11px] font-mono uppercase tracking-widest text-[#D7E2EA]/60 bg-black/70 px-3 py-1 rounded-full border border-white/10">
-                {project.col2Label || 'Illustrative image'}
-              </span>
+              {/* DETAILS Button (fully visible with clear contrast) */}
+              <button
+                type="button"
+                onClick={() => onOpenProject(project)}
+                className="rounded-full px-5 py-2.5 border-2 border-white/30 hover:border-white text-white hover:bg-white/10 text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all cursor-pointer shadow-sm"
+              >
+                Details
+              </button>
             </div>
           </div>
         </div>
@@ -279,7 +284,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProject 
       id="projects"
       className="w-full bg-[#0C0C0C] text-[#D7E2EA] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-6 sm:-mt-8 z-10 relative py-16 sm:py-20 md:py-24 overflow-hidden"
     >
-      {/* Decorative AI Background (Wide neural network grid & heartbeat, full width subtle) */}
+      {/* Decorative AI Background */}
       <SectionBackground
         imageName="bg-projects.webp"
         position="center"
@@ -294,20 +299,19 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProject 
         <FadeIn delay={0} y={30} className="text-center pt-2 sm:pt-4 mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-1.5 mb-2.5">
             <Sparkles className="w-3.5 h-3.5 text-[#B600A8]" />
-            <span className="text-xs uppercase tracking-widest font-semibold text-[#B600A8]">
+            <span className="text-[13px] uppercase tracking-widest font-semibold text-[#D84ED2]">
               Selected Works &amp; Publications
             </span>
           </div>
           <h2
-            className="hero-heading font-black uppercase leading-none tracking-tight text-center"
-            style={{ fontSize: 'clamp(2.6rem, 10vw, 130px)' }}
+            className="hero-heading font-black uppercase leading-none tracking-tight text-center text-4xl sm:text-6xl md:text-7xl lg:text-8xl"
           >
             Featured Projects
           </h2>
         </FadeIn>
 
-        {/* 3 Sticky-Stacking Project Cards spanning full centered width */}
-        <div className="relative pb-16 space-y-8 sm:space-y-12 w-full">
+        {/* 3 Two-Column Project Cards spanning full centered width */}
+        <div className="relative pb-16 space-y-6 sm:space-y-8 w-full">
           {RESEARCH_PROJECTS.map((project, index) => (
             <ProjectCard
               key={project.id}

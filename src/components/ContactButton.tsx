@@ -16,15 +16,14 @@ export const ContactButton: React.FC<ContactButtonProps> = ({
     <motion.button
       type="button"
       onClick={onClick}
-      whileHover={{ scale: 1.04, filter: 'brightness(1.12)' }}
-      whileTap={{ scale: 0.96 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-      className={`rounded-full text-white font-medium uppercase tracking-widest cursor-pointer whitespace-nowrap shrink-0 select-none px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base transition-all duration-200 ${className}`}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+      className={`rounded-full text-white font-semibold uppercase tracking-wider cursor-pointer whitespace-nowrap shrink-0 select-none px-7 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base transition-all duration-200 inline-flex items-center justify-center shadow-lg ${className}`}
       style={{
         background: 'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
-        boxShadow: '0px 4px 4px rgba(181, 1, 167, 0.25), 4px 4px 12px #7721B1 inset',
-        outline: '2px solid white',
-        outlineOffset: '-3px',
+        boxShadow: '0 4px 16px rgba(182, 0, 168, 0.45)',
+        border: '2px solid rgba(255, 255, 255, 0.9)',
       }}
     >
       {label}

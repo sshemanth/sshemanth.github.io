@@ -34,6 +34,8 @@ export interface ProjectItem {
   col1Label1?: string;
   col1Label2?: string;
   col2Label?: string;
+  summary?: string;
+  keyResult?: string;
 }
 
 export interface EducationItem {

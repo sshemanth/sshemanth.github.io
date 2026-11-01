@@ -14,8 +14,8 @@ interface CharProps {
 
 const Character: React.FC<CharProps> = ({ char, progress, range }) => {
   // Starts at a soft readable 0.4 opacity and smoothly illuminates to 1 (pure bright white)
-  const opacity = useTransform(progress, range, [0.4, 1]);
-  const color = useTransform(progress, range, ['#8A96A0', '#FFFFFF']);
+  const opacity = useTransform(progress, range, [0.45, 1]);
+  const color = useTransform(progress, range, ['#c4c4cc', '#FFFFFF']);
 
   return (
     <span className="relative inline-block">

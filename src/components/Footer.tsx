@@ -26,31 +26,31 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContact, onOpenBio }) => {
       <div className="w-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-between gap-12 relative z-10">
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 pb-12 border-b border-white/10">
           <div>
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#B600A8] mb-2">
-              <GraduationCap className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-widest text-[#D84ED2] mb-2">
+              <GraduationCap className="w-4 h-4 text-cyan-400" />
               <span>Seeking PhD Positions in Medical AI · 2027</span>
             </div>
             <h3 className="hero-heading font-black uppercase text-3xl sm:text-5xl md:text-6xl tracking-tight mt-1">
               Let&apos;s Collaborate
             </h3>
-            <p className="text-sm sm:text-base text-[#D7E2EA]/80 max-w-xl mt-3 font-light leading-relaxed">
+            <p className="text-base text-[#c4c4cc] max-w-xl mt-3 font-light leading-relaxed">
               I am seeking PhD opportunities and research collaborations in Medical AI. If my research aligns with your group, I would be glad to connect.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4 mt-6 text-sm text-[#D7E2EA]">
+            <div className="flex flex-wrap items-center gap-4 mt-6 text-sm sm:text-base text-[#E0E6ED]">
               <a
                 href="mailto:sshemanthofficial@gmail.com"
                 className="flex items-center gap-2 hover:text-white transition-colors"
               >
                 <Mail className="w-4 h-4 text-[#B600A8]" />
-                <span className="font-mono text-xs sm:text-sm">sshemanthofficial@gmail.com</span>
+                <span className="font-mono text-sm sm:text-base">sshemanthofficial@gmail.com</span>
               </a>
               <span className="text-white/20">·</span>
               <a
                 href="https://linkedin.com/in/sshemanth"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 hover:text-white transition-colors text-xs sm:text-sm"
+                className="flex items-center gap-1.5 hover:text-white transition-colors text-sm sm:text-base"
               >
                 <Linkedin className="w-4 h-4 text-cyan-400" />
                 <span>linkedin.com/in/sshemanth</span>
@@ -60,7 +60,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContact, onOpenBio }) => {
                 href="https://github.com/sshemanth"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 hover:text-white transition-colors text-xs sm:text-sm"
+                className="flex items-center gap-1.5 hover:text-white transition-colors text-sm sm:text-base"
               >
                 <Github className="w-4 h-4 text-purple-400" />
                 <span>github.com/sshemanth</span>
@@ -68,13 +68,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContact, onOpenBio }) => {
             </div>
           </div>
 
-          <div className="shrink-0 flex flex-wrap items-center gap-3">
+          <div className="shrink-0 flex flex-wrap items-center gap-3.5">
             <a
               href="./cv.pdf"
               download="Sri_Sai_Hemanth_Bollepalli_CV.pdf"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-white/20 hover:border-white px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm font-medium uppercase tracking-wider text-[#D7E2EA] hover:text-white hover:bg-white/10 transition-all flex items-center gap-2 cursor-pointer"
+              className="rounded-full border-2 border-white/30 hover:border-white px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-[#E0E6ED] hover:text-white hover:bg-white/10 transition-all flex items-center gap-2 cursor-pointer shadow-md"
             >
               <FileDown className="w-4 h-4 text-cyan-400" />
               <span>Download CV</span>
@@ -83,7 +83,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContact, onOpenBio }) => {
             <button
               type="button"
               onClick={scrollToTop}
-              className="p-3.5 rounded-full border border-white/20 hover:border-white text-white/80 hover:text-white transition-colors cursor-pointer"
+              className="p-3.5 rounded-full border-2 border-white/30 hover:border-white text-white/90 hover:text-white transition-colors cursor-pointer"
               aria-label="Back to top"
             >
               <ArrowUp className="w-5 h-5" />
@@ -91,8 +91,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContact, onOpenBio }) => {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-[#D7E2EA]/50 font-light">
-          <div className="flex flex-wrap items-center gap-6 uppercase tracking-wider">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-sm text-[#c4c4cc] font-light">
+          <div className="flex flex-wrap items-center gap-6 uppercase tracking-wider text-sm font-medium">
             <button
               onClick={() => {
                 const el = document.getElementById('about');
@@ -134,7 +134,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContact, onOpenBio }) => {
             </button>
           </div>
 
-          <div>
+          <div className="text-sm text-[#c4c4cc]">
             © 2026 Sri Sai Hemanth Bollepalli · Sydney, Australia
           </div>
         </div>

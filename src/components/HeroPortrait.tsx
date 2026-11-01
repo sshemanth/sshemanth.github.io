@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Magnet from './Magnet';
 
 interface HeroPortraitProps {
@@ -11,12 +11,17 @@ const normalizePath = (path: string) => {
   return `${BASE}${clean}`;
 };
 
-const DEFAULT_PORTRAIT = normalizePath('images/hemanth-portrait.jpg');
+const DEFAULT_PORTRAIT = normalizePath('images/hemanth.png');
 
 export const HeroPortrait: React.FC<HeroPortraitProps> = ({
   initialImage,
 }) => {
+  const [hasError, setHasError] = useState(false);
   const portraitSrc = initialImage ? normalizePath(initialImage) : DEFAULT_PORTRAIT;
+
+  if (hasError) {
+    return null;
+  }
 
   return (
     <div className="relative w-full flex flex-col items-center">
@@ -35,6 +40,7 @@ export const HeroPortrait: React.FC<HeroPortraitProps> = ({
             className="w-full h-auto object-cover block select-none pointer-events-none transition-all duration-300"
             referrerPolicy="no-referrer"
             loading="eager"
+            onError={() => setHasError(true)}
           />
 
           {/* Seamless gradient fade at bottom to blend into #0C0C0C */}
@@ -42,7 +48,7 @@ export const HeroPortrait: React.FC<HeroPortraitProps> = ({
 
           {/* Identity Tag */}
           <div className="absolute top-4 left-4 z-20 pointer-events-none">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-cyan-300 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-cyan-300 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
               Sri Sai Hemanth Bollepalli
             </span>
           </div>

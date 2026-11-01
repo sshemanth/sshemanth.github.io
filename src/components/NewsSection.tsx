@@ -45,13 +45,12 @@ export const NewsSection: React.FC = () => {
         <FadeIn delay={0} y={30}>
           <div className="flex items-center gap-2 mb-2">
             <Bell className="w-4 h-4 text-[#B600A8]" />
-            <span className="text-xs uppercase tracking-widest font-semibold text-[#B600A8]">
+            <span className="text-[13px] uppercase tracking-widest font-semibold text-[#D84ED2]">
               Recent Updates &amp; Timeline
             </span>
           </div>
           <h2
-            className="hero-heading font-black uppercase leading-none tracking-tight mb-8 sm:mb-12"
-            style={{ fontSize: 'clamp(2.4rem, 8vw, 120px)' }}
+            className="hero-heading font-black uppercase leading-none tracking-tight mb-8 sm:mb-12 text-4xl sm:text-6xl md:text-7xl lg:text-8xl"
           >
             News &amp; Updates
           </h2>
@@ -71,13 +70,13 @@ export const NewsSection: React.FC = () => {
               />
 
               <div className="bg-[#121318] border border-[#272932] hover:border-white/20 rounded-2xl p-5 sm:p-6 shadow-md transition-all duration-200">
-                <div className="flex flex-wrap items-center gap-3 mb-2">
-                  <span className="text-xs font-mono font-semibold text-white bg-white/10 px-2.5 py-0.5 rounded-full">
+                <div className="flex flex-wrap items-center gap-3 mb-2.5">
+                  <span className="text-[13px] font-mono font-semibold text-white bg-white/10 px-3 py-0.5 rounded-full">
                     {item.date}
                   </span>
                   {item.badge && (
                     <span
-                      className={`text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded ${
+                      className={`text-[13px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded ${
                         item.highlight
                           ? 'text-pink-300 bg-pink-950/60 border border-pink-800/50'
                           : 'text-cyan-300 bg-cyan-950/60 border border-cyan-800/40'
@@ -87,14 +86,14 @@ export const NewsSection: React.FC = () => {
                     </span>
                   )}
                   {item.highlight && (
-                    <span className="flex items-center gap-1 text-[11px] text-amber-400 font-mono">
-                      <Sparkles className="w-3 h-3" />
+                    <span className="flex items-center gap-1 text-[13px] text-amber-400 font-mono">
+                      <Sparkles className="w-3.5 h-3.5" />
                       <span>Highlight</span>
                     </span>
                   )}
                 </div>
 
-                <p className="text-sm sm:text-base text-white/90 font-light leading-relaxed">
+                <p className="text-base text-[#E0E6ED] font-light leading-relaxed">
                   {item.content}
                 </p>
               </div>

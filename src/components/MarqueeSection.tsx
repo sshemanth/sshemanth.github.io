@@ -68,7 +68,7 @@ export const MarqueeSection: React.FC = () => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 block"
                 />
               </div>
-              <p className="text-xs sm:text-sm font-medium text-[#D7E2EA]/90 mt-3 text-center leading-snug">
+              <p className="text-sm font-medium text-white mt-3 text-center leading-snug line-clamp-2 max-w-[280px] mx-auto">
                 {card.caption}
               </p>
             </FadeIn>
