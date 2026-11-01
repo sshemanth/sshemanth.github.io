@@ -1,0 +1,6 @@
+{
+  "name": "Hemanth Bollepalli -- Medical AI Researcher",
+  "description": "Medical AI Researcher building deep learning models that read medical scans: brain tumours, knee injuries and skin lesions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
