@@ -1,207 +1,119 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { ImageOff } from 'lucide-react';
+import FadeIn from './FadeIn';
 
-const MEDICAL_IMAGES_ROW1 = [
+interface GalleryCardItem {
+  id: string;
+  src: string;
+  caption: string;
+  tag: string;
+  title: string;
+}
+
+const TOP_GALLERY_CARDS: GalleryCardItem[] = [
   {
-    src: '/src/assets/images/project1_brain_mri_1793506815501.jpg',
-    title: 'BraTS Brain Metastasis Segmentation',
+    id: 'card-brain',
+    src: '/images/card-brain.png',
+    caption: 'MICCAI 2026 · Brain Metastasis Segmentation',
     tag: 'MICCAI 2026',
+    title: 'Brain Metastasis Segmentation',
   },
   {
-    src: '/src/assets/images/about_3d_brain_neuro_1793506817199.jpg',
-    title: '3D Neural Connectome Representation',
-    tag: 'Deep Learning',
-  },
-  {
-    src: '/src/assets/images/project2_knee_mri_1793506815732.jpg',
-    title: 'Knee MRI Multi-Label Attention Heatmap',
+    id: 'card-knee',
+    src: '/images/card-knee.png',
+    caption: '0.88 Macro AUC · Knee MRI Multi-Label Detection',
     tag: '0.88 Macro AUC',
+    title: 'Knee MRI Multi-Label Detection',
   },
   {
-    src: '/src/assets/images/mri_lesion_detail_1793506834836.jpg',
-    title: 'Micro-Lesion & Resection Cavity Zoom',
-    tag: 'nnU-Net ResEnc-L',
+    id: 'card-skin',
+    src: '/images/card-skin.png',
+    caption: '0.515 Test Score · Skin Lesion Classification',
+    tag: '0.515 Test Score',
+    title: 'Skin Lesion Classification',
   },
   {
-    src: 'https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif',
-    title: 'Volumetric 3D Medical Scan Projection',
-    tag: 'Volumetric AI',
-  },
-  {
-    src: '/src/assets/images/dna_helix_3d_1793506836583.jpg',
-    title: 'Biomolecular Latent Structure',
-    tag: 'Computational Bio',
-  },
-  {
-    src: 'https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif',
-    title: 'Neural Latent Space Traversal',
-    tag: 'Transformer Graph',
-  },
-  {
-    src: '/src/assets/images/neural_nodes_3d_1793506835615.jpg',
-    title: 'Interconnected Clinical Feature Graph',
-    tag: 'Graph Neural Nets',
-  },
-];
-
-const MEDICAL_IMAGES_ROW2 = [
-  {
-    src: '/src/assets/images/knee_pipeline_diagram_1793506835541.jpg',
-    title: 'Radiology Report Weak Supervision Pipeline',
-    tag: 'MedGemma + Qwen',
-  },
-  {
-    src: '/src/assets/images/project3_skin_lesion_1793506816496.jpg',
-    title: 'HAM10000 7-Class Skin Lesion Dermoscopy',
-    tag: 'ResNet18 / Vision',
-  },
-  {
-    src: 'https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif',
-    title: 'Volumetric Voxel Reconstructions',
-    tag: 'Voxel Flow',
-  },
-  {
-    src: '/src/assets/images/project1_brain_mri_1793506815501.jpg',
-    title: 'MICCAI BraTS-METS Axial Slice Grid',
+    id: 'card-compare',
+    src: '/images/card-compare.png',
+    caption: 'nnU-Net vs Primus · BraTS-METS Comparison',
     tag: 'nnU-Net vs Primus',
-  },
-  {
-    src: 'https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif',
-    title: 'Dynamic Sensor Array Simulation',
-    tag: 'Clinical Sensors',
-  },
-  {
-    src: '/src/assets/images/project2_knee_mri_1793506815732.jpg',
-    title: 'Grad-CAM Saliency for ACL Tears',
-    tag: 'RSNA Knee Dataset',
-  },
-  {
-    src: 'https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif',
-    title: 'High-Throughput Feature Extraction',
-    tag: 'A100 GPU Cluster',
-  },
-  {
-    src: '/src/assets/images/mri_lesion_detail_1793506834836.jpg',
-    title: 'Surgical Cavity Boundary Delineation',
-    tag: 'Five-Fold CV',
+    title: 'BraTS-METS Comparison',
   },
 ];
 
-// Tripled lists for seamless horizontal movement
-const TRIPLED_ROW_1 = [...MEDICAL_IMAGES_ROW1, ...MEDICAL_IMAGES_ROW1, ...MEDICAL_IMAGES_ROW1];
-const TRIPLED_ROW_2 = [...MEDICAL_IMAGES_ROW2, ...MEDICAL_IMAGES_ROW2, ...MEDICAL_IMAGES_ROW2];
+interface GalleryCardProps {
+  card: GalleryCardItem;
+  index: number;
+}
 
-export const MarqueeSection: React.FC = () => {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const row1Ref = useRef<HTMLDivElement | null>(null);
-  const row2Ref = useRef<HTMLDivElement | null>(null);
-  const [offset, setOffset] = useState<number>(0);
-
-  useEffect(() => {
-    let animationFrameId: number;
-
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const sectionTop = rect.top + window.scrollY;
-      const calcOffset = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
-
-      animationFrameId = requestAnimationFrame(() => {
-        setOffset(calcOffset);
-        if (row1Ref.current) {
-          row1Ref.current.style.transform = `translateX(${calcOffset - 200}px)`;
-        }
-        if (row2Ref.current) {
-          row2Ref.current.style.transform = `translateX(${-(calcOffset - 200)}px)`;
-        }
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
+const GalleryCard: React.FC<GalleryCardProps> = ({ card, index }) => {
+  const [hasError, setHasError] = useState(false);
 
   return (
-    <section
-      ref={sectionRef}
-      className="bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden relative select-none"
-    >
-      <div className="flex flex-col gap-3 w-full">
-        {/* Row 1: moves RIGHT on scroll */}
-        <div
-          ref={row1Ref}
-          className="flex gap-3 w-max"
-          style={{
-            willChange: 'transform',
-            transform: `translateX(${offset - 200}px)`,
-          }}
-        >
-          {TRIPLED_ROW_1.map((item, idx) => (
-            <div
-              key={`r1-${idx}`}
-              className="w-[420px] h-[270px] shrink-0 rounded-2xl overflow-hidden bg-[#16171B] border border-white/10 shadow-lg group relative"
-            >
-              <img
-                src={item.src}
-                alt={item.title}
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                onError={(e) => {
-                  (e.target as HTMLElement).style.display = 'none';
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
-              <div className="absolute bottom-3 left-4 right-4 pointer-events-none">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-cyan-400 bg-cyan-950/60 border border-cyan-800/50 px-2 py-0.5 rounded">
-                  {item.tag}
-                </span>
-                <p className="text-xs font-medium text-white mt-1 truncate">
-                  {item.title}
-                </p>
-              </div>
+    <FadeIn delay={0.08 * index} y={25} className="w-full">
+      <div className="group relative w-full aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-[#14151B] border border-white/10 hover:border-cyan-500/40 shadow-xl transition-all duration-300 flex flex-col justify-between">
+        {hasError ? (
+          <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-[#14151B] text-center">
+            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2 text-[#D7E2EA]/40">
+              <ImageOff className="w-5 h-5 text-cyan-400" />
             </div>
-          ))}
+            <p className="text-xs font-medium text-[#D7E2EA]/85 leading-snug">
+              {card.caption}
+            </p>
+          </div>
+        ) : (
+          <>
+            <img
+              src={card.src}
+              alt={card.caption}
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              onError={() => setHasError(true)}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 select-none"
+            />
+            {/* Subtle gradient scrim */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none transition-opacity duration-300" />
+
+            {/* Bottom caption overlay */}
+            <div className="absolute bottom-0 inset-x-0 p-3 sm:p-4 pointer-events-none flex flex-col justify-end">
+              <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-cyan-300 font-semibold mb-1">
+                {card.tag}
+              </span>
+              <p className="text-xs sm:text-sm font-medium text-white leading-tight">
+                {card.caption}
+              </p>
+            </div>
+          </>
+        )}
+      </div>
+    </FadeIn>
+  );
+};
+
+export const MarqueeSection: React.FC = () => {
+  return (
+    <section
+      aria-label="Top Gallery"
+      className="bg-[#0C0C0C] pt-12 sm:pt-16 md:pt-20 pb-12 sm:pb-16 px-4 sm:px-6 md:px-10 overflow-hidden relative select-none"
+    >
+      <div className="max-w-6xl mx-auto w-full">
+        {/* Section Header */}
+        <div className="flex items-center justify-between mb-6 sm:mb-8">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="text-xs font-mono uppercase tracking-widest text-[#D7E2EA]/70">
+              Top Gallery · Key Research Artifacts
+            </span>
+          </div>
+          <span className="text-xs font-mono text-[#D7E2EA]/40 hidden sm:inline">
+            4 Core Milestones
+          </span>
         </div>
 
-        {/* Row 2: moves LEFT on scroll */}
-        <div
-          ref={row2Ref}
-          className="flex gap-3 w-max"
-          style={{
-            willChange: 'transform',
-            transform: `translateX(${-(offset - 200)}px)`,
-          }}
-        >
-          {TRIPLED_ROW_2.map((item, idx) => (
-            <div
-              key={`r2-${idx}`}
-              className="w-[420px] h-[270px] shrink-0 rounded-2xl overflow-hidden bg-[#16171B] border border-white/10 shadow-lg group relative"
-            >
-              <img
-                src={item.src}
-                alt={item.title}
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                onError={(e) => {
-                  (e.target as HTMLElement).style.display = 'none';
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
-              <div className="absolute bottom-3 left-4 right-4 pointer-events-none">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-[#B600A8] bg-[#B600A8]/20 border border-[#B600A8]/40 px-2 py-0.5 rounded">
-                  {item.tag}
-                </span>
-                <p className="text-xs font-medium text-white mt-1 truncate">
-                  {item.title}
-                </p>
-              </div>
-            </div>
+        {/* 4 Cards Grid - Exact order requested */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+          {TOP_GALLERY_CARDS.map((card, idx) => (
+            <GalleryCard key={card.id} card={card} index={idx} />
           ))}
         </div>
       </div>

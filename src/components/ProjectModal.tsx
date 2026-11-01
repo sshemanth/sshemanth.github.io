@@ -43,9 +43,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
   const images = [
     { url: project.col2Image, label: project.col2Label || 'Primary Medical Scan' },
-    { url: project.col1Image1, label: project.col1Label1 || 'Detail & Architecture' },
-    { url: project.col1Image2, label: project.col1Label2 || 'Biomolecular / Feature Graph' },
+    ...(project.col1Image1 ? [{ url: project.col1Image1, label: project.col1Label1 || 'Detail View' }] : []),
+    ...(project.col1Image2 ? [{ url: project.col1Image2, label: project.col1Label2 || 'Architecture' }] : []),
   ];
+
+  const currentImage = images[activeImageIndex] || images[0];
 
   return (
     <AnimatePresence>
@@ -73,7 +75,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               <div className="flex items-center gap-3 min-w-0">
                 <span className="text-xl sm:text-2xl font-black text-white">{project.number}</span>
                 <span className="text-xs uppercase tracking-widest text-[#B600A8] font-bold truncate">
-                  {project.category}
+                  {project.tag || project.category}
                 </span>
                 <span className="text-[#D7E2EA]/40 hidden sm:inline">·</span>
                 <h3 className="text-lg sm:text-xl font-bold uppercase tracking-tight text-white truncate hidden md:block">
@@ -93,64 +95,74 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             {/* Content body */}
             <div className="overflow-y-auto p-5 sm:p-8 space-y-6">
               {/* Main Media Showcase */}
-              <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-3xl overflow-hidden bg-[#16171C] border border-[#26282E] group">
+              <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-3xl overflow-hidden bg-[#14151B] border border-[#26282E] p-2 flex items-center justify-center group">
                 <img
-                  src={images[activeImageIndex].url}
-                  alt={`${project.title} - ${images[activeImageIndex].label}`}
-                  className="w-full h-full object-cover transition-transform duration-500"
+                  src={currentImage.url}
+                  alt={`${project.title} - ${currentImage.label}`}
+                  className="w-full h-full object-contain rounded-2xl transition-transform duration-500"
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    const target = e.target as HTMLElement;
+                    target.style.display = 'none';
+                  }}
                 />
 
-                {/* Image navigation controls */}
-                <button
-                  type="button"
-                  onClick={() =>
-                    setActiveImageIndex((prev) => (prev - 1 + images.length) % images.length)
-                  }
-                  className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-sm transition-all opacity-80 hover:opacity-100 cursor-pointer"
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setActiveImageIndex((prev) => (prev + 1) % images.length)
-                  }
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-sm transition-all opacity-80 hover:opacity-100 cursor-pointer"
-                  aria-label="Next image"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
+                {/* Image navigation controls (only if > 1 image) */}
+                {images.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setActiveImageIndex((prev) => (prev - 1 + images.length) % images.length)
+                      }
+                      className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-sm transition-all opacity-80 hover:opacity-100 cursor-pointer"
+                      aria-label="Previous image"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setActiveImageIndex((prev) => (prev + 1) % images.length)
+                      }
+                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-sm transition-all opacity-80 hover:opacity-100 cursor-pointer"
+                      aria-label="Next image"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </>
+                )}
 
                 {/* Image caption badge */}
-                <div className="absolute bottom-3 left-3 bg-black/75 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs text-white border border-white/10">
-                  {images[activeImageIndex].label} ({activeImageIndex + 1}/{images.length})
+                <div className="absolute bottom-3 left-3 bg-black/80 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs text-white border border-white/10">
+                  {currentImage.label} {images.length > 1 ? `(${activeImageIndex + 1}/${images.length})` : ''}
                 </div>
               </div>
 
-              {/* Thumbnails */}
-              <div className="grid grid-cols-3 gap-3">
-                {images.map((img, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setActiveImageIndex(idx)}
-                    className={`relative aspect-[16/10] rounded-2xl overflow-hidden border-2 transition-all cursor-pointer ${
-                      activeImageIndex === idx
-                        ? 'border-[#B600A8] ring-2 ring-[#B600A8]/30 scale-[1.02]'
-                        : 'border-[#26282E] opacity-60 hover:opacity-100'
-                    }`}
-                  >
-                    <img
-                      src={img.url}
-                      alt={img.label}
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                  </button>
-                ))}
-              </div>
+              {/* Thumbnails (only if multiple images) */}
+              {images.length > 1 && (
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setActiveImageIndex(idx)}
+                      className={`relative aspect-[16/10] rounded-2xl overflow-hidden border-2 transition-all cursor-pointer bg-[#14151B] p-1 ${
+                        activeImageIndex === idx
+                          ? 'border-[#B600A8] ring-2 ring-[#B600A8]/30 scale-[1.02]'
+                          : 'border-[#26282E] opacity-60 hover:opacity-100'
+                      }`}
+                    >
+                      <img
+                        src={img.url}
+                        alt={img.label}
+                        className="w-full h-full object-contain rounded-xl"
+                        referrerPolicy="no-referrer"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Title, Supervisor & Overview */}
               <div>

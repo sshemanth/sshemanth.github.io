@@ -2,7 +2,7 @@ import React from 'react';
 import FadeIn from './FadeIn';
 import AnimatedText from './AnimatedText';
 import ContactButton from './ContactButton';
-import { BookOpen, Sparkles, Award, GraduationCap, HeartPulse } from 'lucide-react';
+import { BookOpen, Sparkles, Award, GraduationCap } from 'lucide-react';
 
 interface AboutSectionProps {
   onOpenContact: () => void;
@@ -19,82 +19,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
   return (
     <section
       id="about"
-      className="min-h-screen relative flex flex-col items-center justify-center px-5 sm:px-8 md:px-10 py-20 overflow-hidden bg-[#0C0C0C]"
+      className="min-h-[80vh] relative flex flex-col items-center justify-center px-5 sm:px-8 md:px-10 py-16 sm:py-20 md:py-24 overflow-hidden bg-[#0C0C0C]"
     >
-      {/* 5 Floating 3D Medical & Neural Objects: Brain, MRI Slice, DNA Helix, Heartbeat Line, Neural Nodes */}
-
-      {/* 1. Top-Left: 3D Brain Mesh */}
-      <div className="absolute top-[4%] left-[1%] sm:left-[2%] md:left-[4%] z-0 pointer-events-none">
-        <FadeIn delay={0.1} x={-80} y={0} duration={0.9}>
-          <div className="relative group">
-            <img
-              src="/src/assets/images/about_3d_brain_neuro_1793506817199.jpg"
-              alt="3D Neural Brain Connectome"
-              className="w-[110px] sm:w-[150px] md:w-[190px] h-auto rounded-full object-cover shadow-[0_0_40px_rgba(34,211,238,0.25)] border border-cyan-500/20"
-              referrerPolicy="no-referrer"
-              loading="lazy"
-            />
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#121318]/90 border border-cyan-500/30 px-2 py-0.5 rounded text-[10px] uppercase font-mono text-cyan-300 whitespace-nowrap hidden sm:block">
-              Brain MRI Mesh
-            </div>
-          </div>
-        </FadeIn>
-      </div>
-
-      {/* 2. Bottom-Left: 3D DNA Helix */}
-      <div className="absolute bottom-[8%] left-[3%] sm:left-[6%] md:left-[8%] z-0 pointer-events-none">
-        <FadeIn delay={0.25} x={-80} y={0} duration={0.9}>
-          <div className="relative group">
-            <img
-              src="/src/assets/images/dna_helix_3d_1793506836583.jpg"
-              alt="3D DNA Double Helix"
-              className="w-[90px] sm:w-[130px] md:w-[170px] h-auto rounded-full object-cover shadow-[0_0_40px_rgba(182,0,168,0.25)] border border-[#B600A8]/30"
-              referrerPolicy="no-referrer"
-              loading="lazy"
-            />
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#121318]/90 border border-[#B600A8]/40 px-2 py-0.5 rounded text-[10px] uppercase font-mono text-[#D7E2EA] whitespace-nowrap hidden sm:block">
-              DNA Helix
-            </div>
-          </div>
-        </FadeIn>
-      </div>
-
-      {/* 3. Top-Right: 3D Neural Network Nodes */}
-      <div className="absolute top-[4%] right-[1%] sm:right-[2%] md:right-[4%] z-0 pointer-events-none">
-        <FadeIn delay={0.15} x={80} y={0} duration={0.9}>
-          <div className="relative group">
-            <img
-              src="/src/assets/images/neural_nodes_3d_1793506835615.jpg"
-              alt="Neural Network Graph Nodes"
-              className="w-[110px] sm:w-[150px] md:w-[190px] h-auto rounded-full object-cover shadow-[0_0_40px_rgba(182,0,168,0.3)] border border-[#B600A8]/20"
-              referrerPolicy="no-referrer"
-              loading="lazy"
-            />
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#121318]/90 border border-purple-500/30 px-2 py-0.5 rounded text-[10px] uppercase font-mono text-purple-300 whitespace-nowrap hidden sm:block">
-              Neural Nodes
-            </div>
-          </div>
-        </FadeIn>
-      </div>
-
-      {/* 4. Bottom-Right: 3D Heartbeat Pulse / ECG Line */}
-      <div className="absolute bottom-[8%] right-[3%] sm:right-[6%] md:right-[8%] z-0 pointer-events-none">
-        <FadeIn delay={0.3} x={80} y={0} duration={0.9}>
-          <div className="relative group">
-            <img
-              src="/src/assets/images/heartbeat_ecg_3d_1793508382436.jpg"
-              alt="3D Heartbeat ECG Pulse Line"
-              className="w-[105px] sm:w-[145px] md:w-[185px] h-auto rounded-2xl object-cover shadow-[0_0_40px_rgba(34,211,238,0.3)] border border-cyan-400/20"
-              referrerPolicy="no-referrer"
-              loading="lazy"
-            />
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#121318]/90 border border-cyan-500/40 px-2 py-0.5 rounded text-[10px] uppercase font-mono text-cyan-300 whitespace-nowrap hidden sm:block">
-              Heartbeat Line
-            </div>
-          </div>
-        </FadeIn>
-      </div>
-
       {/* Center Content Container */}
       <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-4xl mx-auto w-full">
         {/* Heading */}
@@ -112,13 +38,13 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
         </FadeIn>
 
         {/* Gap between heading & text */}
-        <div className="h-8 sm:h-12 md:h-14" />
+        <div className="h-6 sm:h-10 md:h-12" />
 
         {/* Animated paragraph: character-by-character scroll-driven */}
         <AnimatedText text={shortBio} />
 
         {/* Highlights Strip */}
-        <FadeIn delay={0.2} y={20} className="w-full mt-10 max-w-2xl">
+        <FadeIn delay={0.2} y={20} className="w-full mt-8 sm:mt-10 max-w-2xl">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
             <div className="bg-[#14151A] border border-[#272932] rounded-2xl p-4 flex items-start gap-3">
               <Award className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
@@ -147,7 +73,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
         </FadeIn>
 
         {/* Gap between highlights & action buttons */}
-        <div className="h-10 sm:h-14 md:h-16" />
+        <div className="h-8 sm:h-10 md:h-12" />
 
         {/* Action Buttons: Contact Me + Read Full Story */}
         <FadeIn delay={0.3} y={20} className="flex flex-wrap items-center justify-center gap-4">

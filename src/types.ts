@@ -19,6 +19,7 @@ export interface ProjectItem {
   number: string;
   title: string;
   category: string;
+  tag?: string;
   supervisor?: string;
   overview: string;
   whatIDid: string[];
@@ -27,8 +28,8 @@ export interface ProjectItem {
   next?: string;
   tools: string[];
   links?: { label: string; url: string }[];
-  col1Image1: string;
-  col1Image2: string;
+  col1Image1?: string;
+  col1Image2?: string;
   col2Image: string;
   col1Label1?: string;
   col1Label2?: string;

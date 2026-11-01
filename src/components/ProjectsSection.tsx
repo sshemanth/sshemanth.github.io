@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import FadeIn from './FadeIn';
 import LiveProjectButton from './LiveProjectButton';
 import { ProjectItem } from '../types';
+import { ImageOff, Sparkles } from 'lucide-react';
 
 interface ProjectsSectionProps {
   onOpenProject: (project: ProjectItem) => void;
@@ -14,6 +15,7 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
     number: '01',
     title: 'A Deep Learning Framework for Robust Brain Metastasis Segmentation and Small-Lesion Detection',
     category: 'Research · MICCAI 2026 BraTS-METS Challenge · Accepted Paper',
+    tag: 'MICCAI 2026 · BRAIN METASTASIS',
     supervisor: 'A/Prof. Steve Ling, AIVision Nexus Laboratory, UTS',
     overview:
       'Brain metastases are often small and easy to miss on MRI, yet early detection is key for treatment planning. This work develops a segmentation framework that improves the detection of small lesions and post-surgical resection cavities.',
@@ -31,18 +33,15 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
       { label: 'Challenge Code', url: 'https://github.com/sshemanth/brats2026' },
       { label: 'Primus Study', url: 'https://github.com/sshemanth/brats-mets-primus-rc' },
     ],
-    col2Image: '/src/assets/images/project1_brain_mri_1793506815501.jpg',
-    col2Label: 'Axial Brain MRI Slice with Multi-Class Tumour Overlays',
-    col1Image1: '/src/assets/images/mri_lesion_detail_1793506834836.jpg',
-    col1Label1: 'Small-Lesion & Resection Cavity Close-up',
-    col1Image2: '/src/assets/images/about_3d_brain_neuro_1793506817199.jpg',
-    col1Label2: 'Framework Feature Architecture & Connectome',
+    col2Image: '/images/brain-framework.png',
+    col2Label: 'Segmentation Framework Overview',
   },
   {
     id: 'knee-mri-weak-supervision',
     number: '02',
     title: 'Multi-Label Knee MRI Abnormality Detection Using Report-Derived Weak Supervision',
     category: 'Research · RSNA Knee MRI Dataset · Target Venue: MIDL 2027',
+    tag: '0.88 MACRO AUC · WEAK SUPERVISION',
     overview:
       'Expert annotation of medical scans is slow and costly. This project uses existing radiology reports as a source of labels, allowing a model to learn to detect 12 knee abnormalities from MRI without manual image labelling.',
     whatIDid: [
@@ -57,18 +56,15 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
     links: [
       { label: 'GitHub Repository', url: 'https://github.com/sshemanth' },
     ],
-    col2Image: '/src/assets/images/project2_knee_mri_1793506815732.jpg',
-    col2Label: 'Sagittal Knee MRI with Grad-CAM Attention Heatmap',
-    col1Image1: '/src/assets/images/knee_pipeline_diagram_1793506835541.jpg',
-    col1Label1: 'Report-to-Label Extraction Pipeline',
-    col1Image2: '/src/assets/images/neural_nodes_3d_1793506835615.jpg',
-    col1Label2: '12-Abnormality Saliency & Correlation Network',
+    col2Image: '/images/knee-pipeline.png',
+    col2Label: 'Report-to-Label Pipeline',
   },
   {
     id: 'ham10000-skin-classification',
     number: '03',
     title: 'Skin Lesion Classification Under Class Imbalance (HAM10000)',
-    category: 'Applied Research · Dermatology Imaging',
+    category: 'Applied Research · Dermatology Imaging · CONVNEXT + EFFICIENTNET',
+    tag: 'CONVNEXT + EFFICIENTNET',
     overview:
       'Early detection of skin cancer improves outcomes, but real dermatology datasets are highly imbalanced, with rare and dangerous lesion types under-represented. This project classifies dermoscopy images into 7 lesion types with a focus on rare classes.',
     whatIDid: [
@@ -110,14 +106,72 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
     links: [
       { label: 'GitHub Repository', url: 'https://github.com/sshemanth' },
     ],
-    col2Image: '/src/assets/images/project3_skin_lesion_1793506816496.jpg',
-    col2Label: 'Sample Image Grid Across 7 Dermoscopic Lesion Classes',
-    col1Image1: '/src/assets/images/dna_helix_3d_1793506836583.jpg',
-    col1Label1: 'Biomolecular Latent Subtype Manifold',
-    col1Image2: '/src/assets/images/heartbeat_ecg_3d_1793508382436.jpg',
-    col1Label2: 'Diagnostic Decision Robustness Profile',
+    col2Image: '/images/skin-model-comparison.png',
+    col2Label: 'Model Comparison Results',
+    col1Image1: '/images/skin-classes.png',
+    col1Label1: '7 Dermoscopic Lesion Classes',
   },
 ];
+
+interface ProjectImageProps {
+  src: string;
+  label: string;
+  badgeText?: string;
+  onClick: () => void;
+  className?: string;
+}
+
+const ProjectImageFrame: React.FC<ProjectImageProps> = ({
+  src,
+  label,
+  badgeText,
+  onClick,
+  className = '',
+}) => {
+  const [error, setError] = useState(false);
+
+  return (
+    <div
+      onClick={onClick}
+      className={`relative w-full overflow-hidden rounded-[24px] sm:rounded-[32px] md:rounded-[40px] cursor-pointer group bg-[#121318] border border-white/10 hover:border-white/25 transition-all duration-300 flex items-center justify-center p-2 sm:p-3 ${className}`}
+    >
+      {error ? (
+        <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 bg-[#121318]">
+          <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2.5 text-[#D7E2EA]/40">
+            <ImageOff className="w-5 h-5 text-cyan-400" />
+          </div>
+          <p className="text-xs sm:text-sm font-medium text-white/90 max-w-sm">
+            {label}
+          </p>
+        </div>
+      ) : (
+        <>
+          <img
+            src={src}
+            alt={label}
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            onError={() => setError(true)}
+            className="w-full h-full object-contain rounded-[18px] sm:rounded-[26px] md:rounded-[32px] transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+          {/* Subtle bottom caption pill */}
+          <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between pointer-events-none">
+            <div className="bg-black/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 flex items-center gap-2 max-w-[90%]">
+              {badgeText && (
+                <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-300 font-semibold shrink-0">
+                  {badgeText}
+                </span>
+              )}
+              <span className="text-xs text-white font-medium truncate">
+                {label}
+              </span>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
 interface CardProps {
   project: ProjectItem;
@@ -142,34 +196,37 @@ const ProjectCard: React.FC<CardProps> = ({
   const targetScale = 1 - (totalCards - 1 - index) * 0.03;
   const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale]);
 
+  const hasDetailImage = Boolean(project.col1Image1);
+
   return (
     <div
       ref={cardContainerRef}
       className="h-[88vh] sticky flex items-start justify-center"
       style={{
-        top: `calc(5rem + ${index * 28}px)`,
+        top: `calc(4.5rem + ${index * 26}px)`,
       }}
     >
       <motion.div
         style={{ scale }}
-        className="w-full max-w-6xl rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-6 md:p-8 flex flex-col justify-between shadow-2xl overflow-hidden"
+        className="w-full max-w-6xl rounded-[36px] sm:rounded-[46px] md:rounded-[56px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-6 md:p-8 flex flex-col justify-between shadow-2xl overflow-hidden"
       >
         {/* Top row */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 sm:pb-6 border-b border-[#D7E2EA]/15 mb-4 sm:mb-6">
-          <div className="flex items-center gap-4 sm:gap-6 md:gap-8 min-w-0">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 sm:pb-5 border-b border-[#D7E2EA]/15 mb-3 sm:mb-4">
+          <div className="flex items-center gap-3 sm:gap-6 md:gap-8 min-w-0 flex-1">
             {/* Number */}
             <div
               className="font-black text-[#D7E2EA] leading-none shrink-0"
-              style={{ fontSize: 'clamp(2.5rem, 8vw, 110px)' }}
+              style={{ fontSize: 'clamp(2.4rem, 7vw, 96px)' }}
             >
               {project.number}
             </div>
 
-            <div className="flex flex-col min-w-0">
-              <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#B600A8] truncate">
-                {project.category}
+            <div className="flex flex-col min-w-0 pr-2">
+              <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#B600A8] truncate mb-1">
+                {project.tag || project.category}
               </span>
-              <h3 className="font-medium uppercase tracking-tight text-white text-base sm:text-xl md:text-2xl lg:text-3xl line-clamp-1">
+              {/* Project title allows wrapping onto 2 lines naturally */}
+              <h3 className="font-medium uppercase tracking-tight text-white text-base sm:text-xl md:text-2xl lg:text-3xl line-clamp-2 leading-tight">
                 {project.title}
               </h3>
             </div>
@@ -183,72 +240,45 @@ const ProjectCard: React.FC<CardProps> = ({
           </div>
         </div>
 
-        {/* Bottom row: Two-column image grid */}
-        <div className="grid grid-cols-1 md:grid-cols-10 gap-3 sm:gap-4 md:gap-6 flex-1 min-h-0">
-          {/* Left column (40% width): 2 stacked images */}
-          <div className="md:col-span-4 flex flex-col gap-3 sm:gap-4">
-            {/* Col1 image 1 */}
-            <div
-              onClick={() => onOpenProject(project)}
-              className="w-full overflow-hidden rounded-[30px] sm:rounded-[40px] md:rounded-[50px] cursor-pointer group bg-[#16171B] border border-white/10 relative"
-              style={{ height: 'clamp(130px, 16vw, 230px)' }}
-            >
-              <img
-                src={project.col1Image1}
-                alt={project.col1Label1 || 'Research detail view 1'}
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-3 text-center">
-                <span className="text-xs font-semibold uppercase tracking-wider text-white bg-black/70 px-3 py-1 rounded-full backdrop-blur-sm border border-white/20">
-                  {project.col1Label1 || 'Inspect Detail'}
-                </span>
+        {/* Bottom row: Clean 16:9 aspect-ratio showcase */}
+        <div className="flex-1 min-h-0 flex flex-col justify-center">
+          {hasDetailImage ? (
+            /* Project 03 layout: Main image + 1 Detail image side-by-side */
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 h-full min-h-[240px] sm:min-h-[300px] md:min-h-[380px]">
+              {/* Main Image: Model Comparison Results (approx 62% width) */}
+              <div className="md:col-span-7 h-full min-h-[200px]">
+                <ProjectImageFrame
+                  src={project.col2Image}
+                  label={project.col2Label || 'Model Comparison Results'}
+                  badgeText="Primary"
+                  onClick={() => onOpenProject(project)}
+                  className="h-full aspect-[16/9] md:aspect-auto"
+                />
+              </div>
+
+              {/* Detail Image: 7 Dermoscopic Lesion Classes (approx 38% width) */}
+              <div className="md:col-span-5 h-full min-h-[160px]">
+                <ProjectImageFrame
+                  src={project.col1Image1!}
+                  label={project.col1Label1 || '7 Dermoscopic Lesion Classes'}
+                  badgeText="Detail"
+                  onClick={() => onOpenProject(project)}
+                  className="h-full aspect-[16/9] md:aspect-auto"
+                />
               </div>
             </div>
-
-            {/* Col1 image 2 */}
-            <div
-              onClick={() => onOpenProject(project)}
-              className="w-full overflow-hidden rounded-[30px] sm:rounded-[40px] md:rounded-[50px] cursor-pointer group bg-[#16171B] border border-white/10 relative"
-              style={{ height: 'clamp(160px, 22vw, 340px)' }}
-            >
-              <img
-                src={project.col1Image2}
-                alt={project.col1Label2 || 'Research detail view 2'}
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          ) : (
+            /* Project 01 & 02: Full-width tall 16:9 main image with no detail boxes */
+            <div className="w-full h-full min-h-[240px] sm:min-h-[320px] md:min-h-[400px]">
+              <ProjectImageFrame
+                src={project.col2Image}
+                label={project.col2Label || 'Architecture Framework'}
+                badgeText="Pipeline"
+                onClick={() => onOpenProject(project)}
+                className="h-full aspect-[16/9] md:aspect-[21/9] lg:aspect-[16/8]"
               />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-3 text-center">
-                <span className="text-xs font-semibold uppercase tracking-wider text-white bg-black/70 px-3 py-1 rounded-full backdrop-blur-sm border border-white/20">
-                  {project.col1Label2 || 'Inspect Architecture'}
-                </span>
-              </div>
             </div>
-          </div>
-
-          {/* Right column (60% width): 1 tall image */}
-          <div
-            onClick={() => onOpenProject(project)}
-            className="md:col-span-6 w-full h-[260px] sm:h-[320px] md:h-full min-h-[220px] sm:min-h-[280px] md:min-h-[380px] overflow-hidden rounded-[30px] sm:rounded-[40px] md:rounded-[50px] cursor-pointer group bg-[#16171B] border border-white/10 relative"
-          >
-            <img
-              src={project.col2Image}
-              alt={project.col2Label || 'Primary medical AI visualization'}
-              loading="lazy"
-              referrerPolicy="no-referrer"
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex flex-col justify-end p-6">
-              <span className="text-xs font-semibold uppercase tracking-wider text-cyan-300">
-                Primary Diagnostic Visualizer
-              </span>
-              <p className="text-sm font-medium text-white truncate">
-                {project.col2Label}
-              </p>
-            </div>
-          </div>
+          )}
         </div>
       </motion.div>
     </div>
@@ -259,26 +289,27 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProject 
   return (
     <section
       id="projects"
-      className="bg-[#0C0C0C] text-[#D7E2EA] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 relative px-4 sm:px-6 md:px-10 pb-32"
+      className="bg-[#0C0C0C] text-[#D7E2EA] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-6 sm:-mt-8 z-10 relative px-4 sm:px-6 md:px-10 pb-28"
     >
       <div className="max-w-6xl mx-auto w-full">
-        {/* Section Heading */}
-        <FadeIn delay={0} y={40} className="text-center pt-16 sm:pt-20 md:pt-28 mb-12 sm:mb-16 md:mb-24">
-          <div className="inline-block mb-3">
+        {/* Section Heading - tight top padding to eliminate dead gaps */}
+        <FadeIn delay={0} y={30} className="text-center pt-8 sm:pt-12 md:pt-14 mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-1.5 mb-2.5">
+            <Sparkles className="w-3.5 h-3.5 text-[#B600A8]" />
             <span className="text-xs uppercase tracking-widest font-semibold text-[#B600A8]">
               Selected Works &amp; Publications
             </span>
           </div>
           <h2
             className="hero-heading font-black uppercase leading-none tracking-tight text-center"
-            style={{ fontSize: 'clamp(2.8rem, 11vw, 150px)' }}
+            style={{ fontSize: 'clamp(2.6rem, 10vw, 130px)' }}
           >
             Featured Projects
           </h2>
         </FadeIn>
 
         {/* 3 Sticky-Stacking Project Cards */}
-        <div className="relative pb-24 space-y-12 sm:space-y-16">
+        <div className="relative pb-16 space-y-8 sm:space-y-12">
           {RESEARCH_PROJECTS.map((project, index) => (
             <ProjectCard
               key={project.id}

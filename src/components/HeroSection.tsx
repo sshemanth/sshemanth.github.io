@@ -74,8 +74,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       {/* 2. Hero Heading */}
-      <FadeIn delay={0.15} y={40} className="w-full overflow-hidden text-center z-20">
-        <h1 className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full text-[12.5vw] sm:text-[14vw] md:text-[15.5vw] lg:text-[17vw] mt-4 sm:mt-2 md:-mt-4">
+      <FadeIn delay={0.15} y={40} className="w-full overflow-hidden text-center z-20 px-2">
+        <h1 className="hero-heading font-black uppercase tracking-tight leading-tight whitespace-nowrap w-full text-[8.5vw] sm:text-[9.5vw] md:text-[11vw] lg:text-[12.5vw] mt-2 sm:mt-1 md:-mt-3">
           Hi, I&apos;m Hemanth
         </h1>
         <p className="text-xs sm:text-sm md:text-base font-light uppercase tracking-[0.3em] text-[#BBCCD7]/70 mt-1">
@@ -86,7 +86,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* 3. Hero Portrait with Magnet effect & Photo Selection */}
       <div className="absolute left-1/2 -translate-x-1/2 z-10 w-[270px] sm:w-[350px] md:w-[430px] lg:w-[490px] top-1/2 -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 pointer-events-auto">
         <FadeIn delay={0.6} y={30} className="w-full h-full flex justify-center">
-          <HeroPortrait initialImage="/assets/aistudio/IMG_0981.JPG_c43143f4.jpeg" />
+          <HeroPortrait initialImage="/images/hemanth-portrait.jpg" />
         </FadeIn>
       </div>
 

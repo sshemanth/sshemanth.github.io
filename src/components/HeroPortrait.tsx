@@ -6,8 +6,8 @@ interface HeroPortraitProps {
   initialImage?: string;
 }
 
-const DEFAULT_PORTRAIT = '/assets/aistudio/IMG_0981.JPG_c43143f4.jpeg';
-const BACKUP_PORTRAIT = '/src/assets/images/hero_hemanth_portrait_1793506798754.jpg';
+const DEFAULT_PORTRAIT = '/images/hemanth-portrait.jpg';
+const BACKUP_PORTRAIT = '/images/hemanth-portrait.jpg';
 
 export const HeroPortrait: React.FC<HeroPortraitProps> = ({
   initialImage = DEFAULT_PORTRAIT,
