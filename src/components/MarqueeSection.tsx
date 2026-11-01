@@ -15,23 +15,23 @@ const normalizePath = (path: string) => {
 
 const TOP_GALLERY_CARDS: GalleryCardItem[] = [
   {
-    id: 'card-brain',
-    src: normalizePath('images/card-brain.png'),
+    id: 'card-brain-ai',
+    src: normalizePath('images/card-brain-ai.png'),
     caption: 'MICCAI 2026 · Brain Metastasis Segmentation',
   },
   {
-    id: 'card-knee',
-    src: normalizePath('images/card-knee.png'),
+    id: 'card-knee-ai',
+    src: normalizePath('images/card-knee-ai.png'),
     caption: '0.88 Macro AUC · Knee MRI Multi-Label Detection',
   },
   {
-    id: 'card-skin',
-    src: normalizePath('images/card-skin.png'),
-    caption: '0.515 Test Score · Skin Lesion Classification',
+    id: 'card-skin-ai',
+    src: normalizePath('images/card-skin-ai.png'),
+    caption: '0.515 ISIC Balanced Accuracy · Skin Lesion Classification',
   },
   {
-    id: 'card-compare',
-    src: normalizePath('images/card-compare.png'),
+    id: 'card-compare-ai',
+    src: normalizePath('images/card-compare-ai.png'),
     caption: 'nnU-Net vs Primus · BraTS-METS Comparison',
   },
 ];
@@ -64,7 +64,7 @@ export const MarqueeSection: React.FC = () => {
                 <img
                   src={card.src}
                   alt={card.caption}
-                  loading="eager"
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 block"
                 />
               </div>

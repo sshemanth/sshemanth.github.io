@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Copy, Check, Send, Sparkles, Linkedin, Github, GraduationCap } from 'lucide-react';
+import { X, Mail, Copy, Check, Send, Sparkles, Linkedin, Github, GraduationCap, FileDown } from 'lucide-react';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -92,14 +92,14 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
               </p>
             </div>
 
-            {/* Direct Email Pill */}
-            <div className="flex items-center justify-between gap-3 p-3.5 rounded-2xl bg-[#18191E] border border-[#2D3038] mb-6">
+            {/* Direct Email & CV Pill */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 rounded-2xl bg-[#18191E] border border-[#2D3038] mb-6">
               <div className="flex items-center gap-2.5 min-w-0">
                 <div className="w-8 h-8 rounded-full bg-[#B600A8]/20 flex items-center justify-center text-[#B600A8] shrink-0">
                   <Mail className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-xs text-[#D7E2EA]/60 uppercase tracking-wider">Direct Email</p>
+                  <p className="text-xs text-[#D7E2EA]/60 uppercase tracking-wider">Direct Contact</p>
                   <a
                     href={`mailto:${email}`}
                     className="text-sm font-medium text-white hover:underline truncate block"
@@ -108,23 +108,36 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                   </a>
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={handleCopyEmail}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-xs text-[#D7E2EA] font-medium border border-white/10 transition-colors shrink-0 cursor-pointer"
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>Copy Email</span>
-                  </>
-                )}
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-xs text-[#D7E2EA] font-medium border border-white/10 transition-colors shrink-0 cursor-pointer"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy Email</span>
+                    </>
+                  )}
+                </button>
+
+                <a
+                  href="./cv.pdf"
+                  download="Sri_Sai_Hemanth_Bollepalli_CV.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs text-white font-medium border border-white/20 transition-colors shrink-0 cursor-pointer"
+                >
+                  <FileDown className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>CV</span>
+                </a>
+              </div>
             </div>
 
             {submitted ? (

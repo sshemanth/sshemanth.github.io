@@ -1,9 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import FadeIn from './FadeIn';
-import LiveProjectButton from './LiveProjectButton';
 import { ProjectItem } from '../types';
-import { ImageOff, Sparkles } from 'lucide-react';
+import { ExternalLink, FileText, Github, Sparkles } from 'lucide-react';
 
 interface ProjectsSectionProps {
   onOpenProject: (project: ProjectItem) => void;
@@ -32,15 +31,16 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
       'Focused on two clinically hard cases: small lesions and resection cavities',
       'Served as a reviewer for the challenge (3 manuscripts)',
     ],
-    result: 'Paper accepted at the MICCAI 2026 BraTS-METS Challenge (to appear in the Springer proceedings).',
+    result: 'Paper accepted at the MICCAI 2026 BraTS-METS Challenge (to appear in Springer proceedings).',
     next: 'Full cross-validation and ablation studies towards a journal publication.',
     tools: ['Python', 'PyTorch', 'nnU-Net', 'Primus', 'A100 GPU computing (RunPod)'],
     links: [
-      { label: 'Challenge Code', url: 'https://github.com/sshemanth/brats2026' },
-      { label: 'Primus Study', url: 'https://github.com/sshemanth/brats-mets-primus-rc' },
+      { label: 'Paper', url: 'https://openreview.net/forum?noteId=swAAtfR82q' },
+      { label: 'View Project', url: 'https://github.com/sshemanth/brats2026' },
+      { label: 'Follow-up work', url: 'https://github.com/sshemanth/brats-mets-primus-rc' },
     ],
-    col2Image: normalizePath('images/brain-framework.png'),
-    col2Label: 'Segmentation Framework Overview',
+    col2Image: normalizePath('images/brain-visual.png'),
+    col2Label: 'Illustrative image',
   },
   {
     id: 'knee-mri-weak-supervision',
@@ -60,10 +60,10 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
     next: 'Scaling backbone architectures and preparing full submission for MIDL 2027.',
     tools: ['Python', 'PyTorch', 'MedGemma', 'Qwen', 'Kaggle', 'Google Cloud Storage'],
     links: [
-      { label: 'GitHub Repository', url: 'https://github.com/sshemanth' },
+      { label: 'View Project', url: 'https://github.com/sshemanth' },
     ],
-    col2Image: normalizePath('images/knee-pipeline.png'),
-    col2Label: 'Report-to-Label Pipeline',
+    col2Image: normalizePath('images/knee-visual.png'),
+    col2Label: 'Illustrative image',
   },
   {
     id: 'ham10000-skin-classification',
@@ -96,7 +96,7 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
         model: 'ConvNeXt-Base + EfficientNet-B0 ensemble',
         externalData: 'No',
         localOOF: '0.504',
-        officialTest: '0.515',
+        officialTest: '0.515 balanced multi-class accuracy (ISIC 2018 Task 3 metric)',
         isBest: true,
       },
       {
@@ -106,77 +106,16 @@ export const RESEARCH_PROJECTS: ProjectItem[] = [
         officialTest: 'Lower (overfit)',
       },
     ],
-    result: 'Best official test score of 0.515 Macro F1, an 11% gain over the baseline, using no external data.',
+    result: 'Best official test score of 0.515 balanced multi-class accuracy (ISIC 2018 Task 3 metric), an 11% gain over the baseline, using no external data.',
     next: 'Extending to multi-modal clinical metadata integration.',
     tools: ['Python', 'PyTorch', 'EfficientNet', 'ConvNeXt', 'Swin Transformer'],
     links: [
-      { label: 'GitHub Repository', url: 'https://github.com/sshemanth' },
+      { label: 'View Project', url: 'https://github.com/sshemanth' },
     ],
-    col2Image: normalizePath('images/skin-model-comparison.png'),
-    col2Label: 'Model Comparison Results',
-    col1Image1: normalizePath('images/skin-classes.png'),
-    col1Label1: '7 Dermoscopic Lesion Classes',
+    col2Image: normalizePath('images/skin-visual.png'),
+    col2Label: 'Illustrative image',
   },
 ];
-
-interface ProjectImageProps {
-  src: string;
-  label: string;
-  badgeText?: string;
-  onClick: () => void;
-  className?: string;
-}
-
-const ProjectImageFrame: React.FC<ProjectImageProps> = ({
-  src,
-  label,
-  badgeText,
-  onClick,
-  className = '',
-}) => {
-  const [error, setError] = useState(false);
-
-  return (
-    <div
-      onClick={onClick}
-      className={`relative w-full overflow-hidden rounded-[24px] sm:rounded-[32px] md:rounded-[40px] cursor-pointer group bg-[#121318] border border-white/10 hover:border-white/25 transition-all duration-300 flex items-center justify-center p-2 sm:p-3 ${className}`}
-    >
-      {error ? (
-        <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 bg-[#121318]">
-          <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2.5 text-[#D7E2EA]/40">
-            <ImageOff className="w-5 h-5 text-cyan-400" />
-          </div>
-          <p className="text-xs sm:text-sm font-medium text-white/90 max-w-sm">
-            {label}
-          </p>
-        </div>
-      ) : (
-        <>
-          <img
-            src={src}
-            alt={label}
-            loading="lazy"
-            onError={() => setError(true)}
-            className="w-full h-full object-contain rounded-[18px] sm:rounded-[26px] md:rounded-[32px] transition-transform duration-500 group-hover:scale-[1.02]"
-          />
-          {/* Subtle bottom caption pill */}
-          <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between pointer-events-none">
-            <div className="bg-black/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 flex items-center gap-2 max-w-[90%]">
-              {badgeText && (
-                <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-300 font-semibold shrink-0">
-                  {badgeText}
-                </span>
-              )}
-              <span className="text-xs text-white font-medium truncate">
-                {label}
-              </span>
-            </div>
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
 
 interface CardProps {
   project: ProjectItem;
@@ -200,8 +139,6 @@ const ProjectCard: React.FC<CardProps> = ({
 
   const targetScale = 1 - (totalCards - 1 - index) * 0.03;
   const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale]);
-
-  const hasDetailImage = Boolean(project.col1Image1);
 
   return (
     <div
@@ -230,60 +167,105 @@ const ProjectCard: React.FC<CardProps> = ({
               <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#B600A8] truncate mb-1">
                 {project.tag || project.category}
               </span>
-              {/* Project title allows wrapping onto 2 lines naturally */}
+              {/* Project title cleanly wraps onto 2 lines naturally without cutting */}
               <h3 className="font-medium uppercase tracking-tight text-white text-base sm:text-xl md:text-2xl lg:text-3xl line-clamp-2 leading-tight">
                 {project.title}
               </h3>
             </div>
           </div>
 
-          <div className="shrink-0 flex items-center gap-3">
-            <LiveProjectButton
-              label="View Project"
+          {/* Action Links & Buttons */}
+          <div className="shrink-0 flex flex-wrap items-center gap-2.5">
+            {project.id === 'brats-mets-segmentation' && (
+              <>
+                <a
+                  href="https://openreview.net/forum?noteId=swAAtfR82q"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-white/10 hover:bg-white/20 border border-white/20 flex items-center gap-1.5 transition-all cursor-pointer"
+                >
+                  <FileText className="w-3.5 h-3.5 text-pink-400" />
+                  <span>Paper</span>
+                  <ExternalLink className="w-3 h-3 text-white/60" />
+                </a>
+                <a
+                  href="https://github.com/sshemanth/brats2026"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full px-5 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white flex items-center gap-1.5 transition-transform hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+                  style={{
+                    background:
+                      'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
+                    boxShadow: '0px 4px 4px rgba(181, 1, 167, 0.25)',
+                    outline: '2px solid white',
+                    outlineOffset: '-3px',
+                  }}
+                >
+                  <Github className="w-4 h-4" />
+                  <span>View Project</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-white/80" />
+                </a>
+                <a
+                  href="https://github.com/sshemanth/brats-mets-primus-rc"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider text-cyan-300 bg-cyan-950/60 hover:bg-cyan-900/60 border border-cyan-700/50 flex items-center gap-1.5 transition-all cursor-pointer hidden md:flex"
+                >
+                  <span>Follow-up work</span>
+                  <ExternalLink className="w-3 h-3 text-cyan-400" />
+                </a>
+              </>
+            )}
+
+            {project.id !== 'brats-mets-segmentation' && (
+              <a
+                href="https://github.com/sshemanth"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full px-5 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white flex items-center gap-1.5 transition-transform hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+                style={{
+                  background:
+                    'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
+                  boxShadow: '0px 4px 4px rgba(181, 1, 167, 0.25)',
+                  outline: '2px solid white',
+                  outlineOffset: '-3px',
+                }}
+              >
+                <Github className="w-4 h-4" />
+                <span>View Project</span>
+                <ExternalLink className="w-3.5 h-3.5 text-white/80" />
+              </a>
+            )}
+
+            <button
+              type="button"
               onClick={() => onOpenProject(project)}
-            />
+              className="text-xs uppercase tracking-wider text-[#D7E2EA]/70 hover:text-white px-3 py-1 cursor-pointer transition-colors"
+            >
+              Details
+            </button>
           </div>
         </div>
 
-        {/* Bottom row: Clean 16:9 aspect-ratio showcase using full centered width */}
+        {/* Bottom row: Full width 16:9 visual with object-contain and caption under it */}
         <div className="flex-1 min-h-0 flex flex-col justify-center w-full">
-          {hasDetailImage ? (
-            /* Project 03 layout: Main image + 1 Detail image side-by-side */
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 h-full min-h-[240px] sm:min-h-[300px] md:min-h-[380px] w-full">
-              {/* Main Image: Model Comparison Results (approx 62% width) */}
-              <div className="md:col-span-7 h-full min-h-[200px]">
-                <ProjectImageFrame
-                  src={project.col2Image}
-                  label={project.col2Label || 'Model Comparison Results'}
-                  badgeText="Primary"
-                  onClick={() => onOpenProject(project)}
-                  className="h-full aspect-[16/9] md:aspect-auto"
-                />
-              </div>
-
-              {/* Detail Image: 7 Dermoscopic Lesion Classes (approx 38% width) */}
-              <div className="md:col-span-5 h-full min-h-[160px]">
-                <ProjectImageFrame
-                  src={project.col1Image1!}
-                  label={project.col1Label1 || '7 Dermoscopic Lesion Classes'}
-                  badgeText="Detail"
-                  onClick={() => onOpenProject(project)}
-                  className="h-full aspect-[16/9] md:aspect-auto"
-                />
-              </div>
+          <div
+            onClick={() => onOpenProject(project)}
+            className="w-full h-full min-h-[240px] sm:min-h-[320px] md:min-h-[400px] relative overflow-hidden rounded-[24px] sm:rounded-[32px] md:rounded-[40px] bg-[#121318] border border-white/10 hover:border-white/30 cursor-pointer group flex flex-col items-center justify-center p-3 sm:p-5 transition-all duration-300"
+          >
+            <img
+              src={project.col2Image}
+              alt={`${project.title} - ${project.col2Label}`}
+              loading="lazy"
+              className="w-full h-full object-contain rounded-[18px] sm:rounded-[26px] md:rounded-[32px] transition-transform duration-500 group-hover:scale-[1.01]"
+            />
+            {/* Small caption under image: "Illustrative image" */}
+            <div className="mt-2 text-center pointer-events-none">
+              <span className="text-[11px] font-mono uppercase tracking-widest text-[#D7E2EA]/60 bg-black/70 px-3 py-1 rounded-full border border-white/10">
+                {project.col2Label || 'Illustrative image'}
+              </span>
             </div>
-          ) : (
-            /* Project 01 & 02: Full-width tall 16:9 main image with no detail boxes */
-            <div className="w-full h-full min-h-[240px] sm:min-h-[320px] md:min-h-[400px]">
-              <ProjectImageFrame
-                src={project.col2Image}
-                label={project.col2Label || 'Architecture Framework'}
-                badgeText="Pipeline"
-                onClick={() => onOpenProject(project)}
-                className="h-full aspect-[16/9] md:aspect-[21/9] lg:aspect-[16/8]"
-              />
-            </div>
-          )}
+          </div>
         </div>
       </motion.div>
     </div>

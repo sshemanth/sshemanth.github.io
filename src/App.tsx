@@ -7,6 +7,9 @@ import React, { useState } from 'react';
 import HeroSection from './components/HeroSection';
 import MarqueeSection from './components/MarqueeSection';
 import AboutSection from './components/AboutSection';
+import PublicationsSection from './components/PublicationsSection';
+import EducationSection from './components/EducationSection';
+import NewsSection from './components/NewsSection';
 import ServicesSection from './components/ServicesSection';
 import ProjectsSection from './components/ProjectsSection';
 import Footer from './components/Footer';
@@ -47,25 +50,34 @@ export default function App() {
         onOpenBio={handleOpenBio}
       />
 
-      {/* 2. MarqueeSection (Medical AI & Scan visualizations) */}
+      {/* 2. Top Gallery (4 Milestone Cards) */}
       <MarqueeSection />
 
-      {/* 3. AboutSection (Short Bio with character scroll reveal & 3D corner assets) */}
+      {/* 3. AboutSection */}
       <AboutSection
         onOpenContact={handleOpenContact}
         onOpenBio={handleOpenBio}
       />
 
-      {/* 4. Research Focus Section (5 research areas + PhD collaboration box) */}
+      {/* 4. PublicationsSection (MICCAI 2026 Accepted Paper & Links) */}
+      <PublicationsSection />
+
+      {/* 5. EducationSection (UTS Master of AI & JNTU Kakinada B.Tech) */}
+      <EducationSection />
+
+      {/* 6. NewsSection (Timeline of recent milestones) */}
+      <NewsSection />
+
+      {/* 7. Research Focus Section (5 research areas + evenly shared PhD & contact boxes) */}
       <ServicesSection
         onOpenContact={handleOpenContact}
         onSelectFocus={handleSelectFocus}
       />
 
-      {/* 5. Projects Section (BraTS-METS, Knee MRI, HAM10000 Skin Lesions) */}
+      {/* 8. Projects Section (BraTS-METS, Knee MRI, HAM10000 Skin Lesions) */}
       <ProjectsSection onOpenProject={handleOpenProject} />
 
-      {/* Footer */}
+      {/* 9. Footer */}
       <Footer
         onOpenContact={handleOpenContact}
         onOpenBio={handleOpenBio}

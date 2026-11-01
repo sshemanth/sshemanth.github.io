@@ -134,35 +134,36 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         <FadeIn delay={0.3} y={25} className="mt-12 sm:mt-16 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
             {/* Box 1: Open to PhD Positions & Research Collaborations */}
-            <div className="bg-[#0C0C0C] text-[#D7E2EA] rounded-[32px] sm:rounded-[40px] p-7 sm:p-10 border border-[#272932] shadow-2xl relative overflow-hidden flex flex-col justify-between">
+            <div className="bg-[#0C0C0C] text-[#D7E2EA] rounded-[32px] sm:rounded-[40px] p-7 sm:p-10 border border-[#272932] shadow-2xl relative overflow-hidden flex flex-col justify-between gap-8">
               <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-[#B600A8]/20 via-[#7621B0]/10 to-transparent blur-3xl pointer-events-none" />
 
-              <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B600A8]/20 border border-[#B600A8]/40 text-[#D7E2EA] text-xs font-semibold uppercase tracking-wider mb-4">
+              <div className="relative z-10 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B600A8]/20 border border-[#B600A8]/40 text-[#D7E2EA] text-xs font-semibold uppercase tracking-wider">
                   <GraduationCap className="w-3.5 h-3.5 text-[#B600A8]" />
                   <span>Doctoral Opportunities</span>
                 </div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-white leading-tight">
                   Open to PhD Positions &amp; Research Collaborations
                 </h3>
-                <p className="text-xs sm:text-sm text-[#D7E2EA]/85 font-light mt-3 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#D7E2EA]/85 font-light leading-relaxed">
                   I am seeking a PhD in Medical AI starting in 2027 and welcome research collaborations. If your lab explores medical imaging segmentation, clinical NLP weak supervision, or robust multimodal architectures, I would be glad to connect.
                 </p>
               </div>
 
-              <div className="relative z-10 pt-6 mt-6 border-t border-white/10 flex flex-wrap items-center gap-2 text-xs font-mono text-[#D7E2EA]/70">
-                <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+              {/* Bottom tags with robust clear spacing */}
+              <div className="relative z-10 pt-5 border-t border-white/10 flex flex-wrap items-center gap-2 text-xs font-mono text-[#D7E2EA]/80">
+                <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
                   Target: 2027 Admission
                 </span>
-                <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
-                  AIVision Nexus Lab
+                <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
+                  AIVision Nexus Lab, UTS
                 </span>
               </div>
             </div>
 
             {/* Box 2: Pink Gradient Get in Touch Box */}
             <div
-              className="rounded-[32px] sm:rounded-[40px] p-7 sm:p-10 text-white shadow-2xl relative overflow-hidden flex flex-col justify-between"
+              className="rounded-[32px] sm:rounded-[40px] p-7 sm:p-10 text-white shadow-2xl relative overflow-hidden flex flex-col justify-between gap-8"
               style={{
                 background:
                   'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
@@ -172,32 +173,44 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 outlineOffset: '-3px',
               }}
             >
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/30 text-white text-xs font-semibold uppercase tracking-wider mb-4">
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/30 text-white text-xs font-semibold uppercase tracking-wider">
                   <Send className="w-3.5 h-3.5 text-white" />
                   <span>Direct Inquiry</span>
                 </div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-white leading-tight">
                   Get in Touch
                 </h3>
-                <p className="text-xs sm:text-sm text-white/90 font-light mt-3 leading-relaxed">
-                  Interested in discussing potential PhD supervision, research topics, preprints, or dataset access? Send a direct message or email.
+                <p className="text-xs sm:text-sm text-white/90 font-light leading-relaxed">
+                  Interested in discussing potential PhD supervision, research topics, preprints, or dataset access? Send a direct message, email, or download my academic CV.
                 </p>
               </div>
 
-              <div className="pt-6 mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <button
-                  type="button"
-                  onClick={onOpenContact}
-                  className="rounded-full bg-white text-[#0C0C0C] hover:bg-[#D7E2EA] px-8 py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-widest flex items-center gap-2 cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-lg"
-                >
-                  <Mail className="w-4 h-4 text-[#B600A8]" />
-                  <span>Send Message</span>
-                </button>
+              <div className="pt-5 border-t border-white/20 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <button
+                    type="button"
+                    onClick={onOpenContact}
+                    className="rounded-full bg-white text-[#0C0C0C] hover:bg-[#D7E2EA] px-6 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-widest flex items-center gap-2 cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-lg"
+                  >
+                    <Mail className="w-4 h-4 text-[#B600A8]" />
+                    <span>Send Message</span>
+                  </button>
+
+                  <a
+                    href="./cv.pdf"
+                    download="Sri_Sai_Hemanth_Bollepalli_CV.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-full bg-black/40 hover:bg-black/60 border border-white/30 px-5 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white flex items-center gap-1.5 transition-all cursor-pointer"
+                  >
+                    <span>Download CV</span>
+                  </a>
+                </div>
 
                 <a
                   href="mailto:sshemanthofficial@gmail.com"
-                  className="text-xs sm:text-sm font-mono text-white/80 hover:text-white underline underline-offset-4 transition-colors"
+                  className="text-xs sm:text-sm font-mono text-white/90 hover:text-white underline underline-offset-4 transition-colors"
                 >
                   sshemanthofficial@gmail.com
                 </a>

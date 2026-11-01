@@ -13,14 +13,19 @@ interface CharProps {
 }
 
 const Character: React.FC<CharProps> = ({ char, progress, range }) => {
-  const opacity = useTransform(progress, range, [0.2, 1]);
+  // Starts at a soft readable 0.4 opacity and smoothly illuminates to 1 (pure bright white)
+  const opacity = useTransform(progress, range, [0.4, 1]);
+  const color = useTransform(progress, range, ['#8A96A0', '#FFFFFF']);
 
   return (
     <span className="relative inline-block">
       <span className="opacity-0 select-none" aria-hidden="true">
         {char}
       </span>
-      <motion.span style={{ opacity }} className="absolute left-0 top-0">
+      <motion.span
+        style={{ opacity, color }}
+        className="absolute left-0 top-0 transition-colors"
+      >
         {char}
       </motion.span>
     </span>
@@ -35,10 +40,9 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 0.8', 'end 0.2'],
+    offset: ['start 0.95', 'start 0.35'],
   });
 
-  // Split into words so lines wrap naturally without breaking individual words
   const words = text.split(' ');
   const totalChars = text.length;
 
@@ -47,7 +51,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
   return (
     <p
       ref={containerRef}
-      className={`text-[#D7E2EA] font-medium text-center leading-relaxed max-w-[560px] text-[clamp(1rem,2vw,1.35rem)] ${className}`}
+      className={`text-white font-normal sm:font-medium text-center leading-relaxed max-w-3xl mx-auto text-[clamp(1.05rem,2.2vw,1.5rem)] ${className}`}
     >
       {words.map((word, wordIndex) => {
         const wordChars = word.split('');
@@ -55,7 +59,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
           <span key={`word-${wordIndex}`} className="inline-block whitespace-nowrap">
             {wordChars.map((char, charIndex) => {
               const start = globalCharIndex / totalChars;
-              const end = Math.min(1, start + 2 / totalChars);
+              const end = Math.min(1, start + 1.5 / totalChars);
               globalCharIndex++;
 
               return (
@@ -70,7 +74,6 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
           </span>
         );
 
-        // Account for space in character count
         if (wordIndex < words.length - 1) {
           globalCharIndex++;
           return (

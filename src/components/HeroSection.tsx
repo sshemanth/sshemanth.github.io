@@ -2,7 +2,7 @@ import React from 'react';
 import FadeIn from './FadeIn';
 import HeroPortrait from './HeroPortrait';
 import ContactButton from './ContactButton';
-import { MapPin, GraduationCap, ArrowUpRight } from 'lucide-react';
+import { MapPin, GraduationCap, ArrowUpRight, FileDown } from 'lucide-react';
 
 interface HeroSectionProps {
   onOpenContact: () => void;
@@ -27,7 +27,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="w-full max-w-7xl mx-auto px-6 md:px-10 pt-6 md:pt-8">
           <nav
             aria-label="Main Navigation"
-            className="w-full flex items-center justify-between text-[#D7E2EA] font-medium uppercase tracking-wider text-sm md:text-lg lg:text-[1.4rem]"
+            className="w-full flex items-center justify-between text-[#D7E2EA] font-medium uppercase tracking-wider text-xs sm:text-base md:text-lg lg:text-[1.3rem]"
           >
             <button
               type="button"
@@ -35,6 +35,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               className="hover:opacity-70 transition-opacity duration-200 cursor-pointer focus-visible:outline-none focus-visible:underline"
             >
               About
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo('publications')}
+              className="hover:opacity-70 transition-opacity duration-200 cursor-pointer focus-visible:outline-none focus-visible:underline"
+            >
+              Publications
             </button>
             <button
               type="button"
@@ -77,10 +84,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
       </div>
 
-      {/* 2. Hero Heading */}
+      {/* 2. Hero Heading (properly sized so full name fits comfortably on all screens) */}
       <FadeIn delay={0.15} y={40} className="w-full z-20">
         <div className="w-full max-w-7xl mx-auto px-6 md:px-10 text-center overflow-hidden">
-          <h1 className="hero-heading font-black uppercase tracking-tight leading-tight whitespace-nowrap w-full text-[8.5vw] sm:text-[9.5vw] md:text-[11vw] lg:text-[12.5vw] mt-2 sm:mt-1 md:-mt-3">
+          <h1 className="hero-heading font-black uppercase tracking-tight leading-tight whitespace-nowrap w-full text-[6.5vw] sm:text-[7.5vw] md:text-[9vw] lg:text-[10.5vw] mt-2 sm:mt-1 md:-mt-3">
             Hi, I&apos;m Hemanth
           </h1>
           <p className="text-xs sm:text-sm md:text-base font-light uppercase tracking-[0.3em] text-[#BBCCD7]/70 mt-1">
@@ -118,7 +125,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.5} y={20} className="shrink-0">
+          <FadeIn delay={0.5} y={20} className="shrink-0 flex flex-wrap items-center gap-3">
+            <a
+              href="./cv.pdf"
+              download="Sri_Sai_Hemanth_Bollepalli_CV.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-white/25 hover:border-white px-5 py-2.5 sm:px-6 sm:py-3.5 text-xs sm:text-sm font-medium uppercase tracking-wider text-[#D7E2EA] hover:text-white hover:bg-white/10 transition-all flex items-center gap-2 cursor-pointer whitespace-nowrap"
+            >
+              <FileDown className="w-4 h-4 text-cyan-400" />
+              <span>Download CV</span>
+            </a>
             <ContactButton onClick={onOpenContact} label="Contact Me" />
           </FadeIn>
         </div>

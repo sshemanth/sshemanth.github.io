@@ -1,6 +1,6 @@
 import React from 'react';
 import ContactButton from './ContactButton';
-import { ArrowUp, Mail, Linkedin, Github, GraduationCap } from 'lucide-react';
+import { ArrowUp, Mail, Linkedin, Github, GraduationCap, FileDown } from 'lucide-react';
 
 interface FooterProps {
   onOpenContact: () => void;
@@ -59,7 +59,17 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContact, onOpenBio }) => {
             </div>
           </div>
 
-          <div className="shrink-0 flex items-center gap-4">
+          <div className="shrink-0 flex flex-wrap items-center gap-3">
+            <a
+              href="./cv.pdf"
+              download="Sri_Sai_Hemanth_Bollepalli_CV.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-white/20 hover:border-white px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm font-medium uppercase tracking-wider text-[#D7E2EA] hover:text-white hover:bg-white/10 transition-all flex items-center gap-2 cursor-pointer"
+            >
+              <FileDown className="w-4 h-4 text-cyan-400" />
+              <span>Download CV</span>
+            </a>
             <ContactButton onClick={onOpenContact} label="Get in Touch" />
             <button
               type="button"

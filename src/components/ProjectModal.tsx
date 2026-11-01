@@ -42,7 +42,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   if (!project) return null;
 
   const images = [
-    { url: project.col2Image, label: project.col2Label || 'Primary Medical Scan' },
+    { url: project.col2Image, label: project.col2Label || 'Illustrative image' },
     ...(project.col1Image1 ? [{ url: project.col1Image1, label: project.col1Label1 || 'Detail View' }] : []),
     ...(project.col1Image2 ? [{ url: project.col1Image2, label: project.col1Label2 || 'Architecture' }] : []),
   ];
